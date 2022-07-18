@@ -1,0 +1,60 @@
+<!-- Este es el documento de html de un carrito de compras -->
+<!--Edwin Donaldo Saucedo Vazquez  Clase Javascript 30435-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <header class="container head_">
+            <div class="container landscape">
+                <span class="title"></span>
+            </div>
+            <div class="container menu">
+                <ul class="menuList">
+                    <li><a href="/index.html">Home</a></li>
+                    <li>Services</li>
+                    <li>Contact</li>
+                    <li><a href="/login.html">Login</a></li>
+                </ul>
+                <div class="cart">
+                    <span class="productCounter" style="display: none;"></span>
+                    <div class="cartContainer">
+                        <ul class="productList">
+                            <li class="iconsCart">
+                                <span class="clear">Clear Cart</span>
+                                <span class="close">X</span>
+                            </li>
+                            <li class="titles">
+                                <span class="imgEmpty"></span>
+                                <span class="name nameTitle">Product</span>
+                                <span class="size">Quantity</span>
+                                <span class="price">Cost</span>
+                            </li>
+                            <div class="content">
+
+                            </div>
+                            <li class="total">
+                                <span class="totalTitle">Total</span>
+                                <span class="totalPrice">$0.00</span>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="containerLogin">
+                <div class="login">
+                    <img class="imgLogin" src="img/user.png" alt="logo" />
+                    <input type="text"  placeholder="Username" class="user">
+                    <input type="password" placeholder="Password" class="pass">
+                    <button class="btnLogin">Login</button>
+                </div>
+
+        </div>
+        <script src="/js/login.js"></script>
+    </body>
+</html>
