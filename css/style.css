@@ -154,13 +154,32 @@ ul {
 .iconsCart{
     all: unset;
     flex-grow: 0;
+    display: flex;
     position: absolute;
     height: 30px;
     background-color: #1d47d3;
-    color: white;
+    color: #ffffff;
     width: 100%;
     border-radius: 20px 20px 0 0;
-    justify-content: flex-end;
+    justify-content: space-between;
+}
+
+.iconsCart span{
+    margin: 0 30px;
+}
+
+.clear:hover{
+    color: #ffffff80;
+    cursor: pointer;
+}
+
+.close{
+    color: red;
+    cursor: pointer;
+}
+
+.close:hover{
+    color: #ffffff;
 }
 
 .login {
