@@ -1,18 +1,13 @@
 /* Este es el documento JS del index de un carrito de compras
 Edwin Donaldo Saucedo Vazquez  Clase Javascript 30435 */
 
-/* Nota se agregaron dos documentos de JavaScript con la finalidad de tener uno independiente
-para cada pagina, me gustaria una retroalimentacion de si esto es una buena practica
-o no, de antemano gracias */
-/*********************************************************************************/
-//Array of initial products
-/*********************************************************************************/
 class Product {
-    constructor(name, price, img) {
+    constructor(name, price, img, input) {
         this.name = name;
         this.price = price;
         this.img = img;
         this.quantCart = 0;
+        this.input = input;
     }
 }
 
@@ -41,28 +36,19 @@ let shopList = [
 
 let cartList = [];
 
-function addToShop(item) {
-    if (shopList.includes(item)) {
-        alert("Product already on list");
-    } else {
-        shopList.push(item);
-    }
-}
+
 /************************************************************************************/
 
 let nameDocument = getDocumentName();
 console.log(nameDocument);
 
 let quantityInput;
-let count = 0;
 let quantity = 0;
 let foodProduct = {};
 
 let cart = document.querySelector(".cart");
 let cartCounter = cart.querySelector(".productCounter");
 let showCart = document.querySelector(".cartContainer");
-let navBar = document.querySelector(".section");
-let product = document.getElementsByClassName("item");
 let itemContainer = document.querySelector(".items");
 let cartContent = document.querySelector(".content");
 let emptyContent = document.querySelector(".productList");
@@ -229,6 +215,7 @@ function addItemToCart(product) {
     text.innerHTML = product.name;
     let input = document.createElement("input");
     input.className = "quantity";
+    input.id = `${product.name}`;
     input.type = "number";
     input.min = "1";
     input.max = "10";
@@ -236,11 +223,13 @@ function addItemToCart(product) {
     list.appendChild(input);
     let price = document.createElement("span");
     price.className = "price";
+    price.id = `price${product.name}`;
     list.appendChild(price);
     price.innerHTML = `$${product.price}.00`;
     img.style.backgroundImage = `url(${product.img})`;
     product.quantCart++;
     cartList.push(product);
+    addEventInput(input);
     return true;
 }
 
@@ -318,4 +307,21 @@ function getTotal() {
         total = total + (element.price * element.quantCart);
     }
     return total;
+}
+
+function addEventInput (input){
+    input.addEventListener("change", function(){
+        let product = cartList.find((item) => item.name == input.id);
+        product.quantCart = input.value;
+        document.querySelector(".total").innerHTML = `$${getTotal()}.00`;
+        document.getElementById(`price${input.id}`).innerHTML = `$${product.price * product.quantCart}.00`;
+    });
+}
+
+function addToShop(item) {
+    if (shopList.includes(item)) {
+        alert("Product already on list");
+    } else {
+        shopList.push(item);
+    }
 }
