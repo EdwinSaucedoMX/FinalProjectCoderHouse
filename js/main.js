@@ -2,12 +2,11 @@
 Edwin Donaldo Saucedo Vazquez  Clase Javascript 30435 */
 
 class Product {
-    constructor(name, price, img, input) {
+    constructor(name, price, img) {
         this.name = name;
         this.price = price;
         this.img = img;
         this.quantCart = 0;
-        this.input = input;
     }
 }
 
@@ -117,11 +116,17 @@ if (nameDocument == "login.html") {
             let name = document.querySelector("#name").value;
             let price = document.querySelector("#price").value;
             let url = document.querySelector("#url").value;
-            shopList.push({ name: name, price: price, img: url });
-            console.log(shopList);
+            if (name == "" || price == "" || url == "") {
+                alert("Please enter all the fields");
+            }
+            else{
+                let product = new Product(name, price, url);
+                shopList.push(product);
+                console.log(shopList);
+            }
         });
     }
-
+    
     function deleteLastProduct() {
         let lastProduct = shopList.pop();
         console.log(lastProduct);
