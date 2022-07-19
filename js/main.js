@@ -17,35 +17,34 @@ class Product {
 }
 
 let shopList = [
-    {name :"Spaghetti", price: 1.00 , img: "img/1.jpg", quantCart : 0},
-    {name :"Burger with fries", price: 1.00 , img: "img/2.jpg", quantCart : 0},
-    {name :"Steak", price: 1.00 , img: "img/3.jpg", quantCart : 0},
-    {name :"Meat Skewers", price: 1.00 , img: "img/4.jpg", quantCart : 0},
-    {name :"Vegan Pizza", price: 1.00 , img: "img/5.jpg", quantCart : 0},
-    {name :"Light Yogurt", price: 1.00 , img: "img/6.jpg", quantCart : 0},
-    {name :"Rainbow  Ice Cream", price: 1.00 , img: "img/7.jpg", quantCart : 0},
-    {name :"Shawarma", price: 1.00 , img: "img/8.jpg", quantCart : 0},
-    {name :"Chicken Salad", price: 1.00 , img: "img/9.jpg", quantCart : 0},
-    {name :"Ribs", price: 1.00 , img: "img/10.jpg", quantCart : 0},
-    {name :"Panini", price: 1.00 , img: "img/11.jpg", quantCart : 0},
-    {name :"Italian Pasta", price: 1.00 , img: "img/12.jpg", quantCart : 0},
-    {name :"Skirt Steak", price: 1.00 , img: "img/13.jpg", quantCart : 0},
-    {name :"Churros", price: 1.00 , img: "img/14.jpg", quantCart : 0},
-    {name :"Skewers", price: 1.00 , img: "img/15.jpg", quantCart : 0},
-    {name :"Salad", price: 1.00 , img: "img/16.jpg", quantCart : 0},
-    {name :"Ramen", price: 1.00 , img: "img/17.jpg", quantCart : 0},
-    {name :"Wings", price: 1.00 , img: "img/18.jpg", quantCart : 0},
-    {name :"Donuts", price: 1.00 , img: "img/19.jpg", quantCart : 0},
-    {name :"Fried Chicked", price: 1.00 , img: "img/20.jpg", quantCart : 0}
+    { name: "Spaghetti", price: 1.0, img: "img/1.jpg", quantCart: 0 },
+    { name: "Burger with fries", price: 1.0, img: "img/2.jpg", quantCart: 0 },
+    { name: "Steak", price: 1.0, img: "img/3.jpg", quantCart: 0 },
+    { name: "Meat Skewers", price: 1.0, img: "img/4.jpg", quantCart: 0 },
+    { name: "Vegan Pizza", price: 1.0, img: "img/5.jpg", quantCart: 0 },
+    { name: "Light Yogurt", price: 1.0, img: "img/6.jpg", quantCart: 0 },
+    { name: "Rainbow  Ice Cream", price: 1.0, img: "img/7.jpg", quantCart: 0 },
+    { name: "Shawarma", price: 1.0, img: "img/8.jpg", quantCart: 0 },
+    { name: "Chicken Salad", price: 1.0, img: "img/9.jpg", quantCart: 0 },
+    { name: "Ribs", price: 1.0, img: "img/10.jpg", quantCart: 0 },
+    { name: "Panini", price: 1.0, img: "img/11.jpg", quantCart: 0 },
+    { name: "Italian Pasta", price: 1.0, img: "img/12.jpg", quantCart: 0 },
+    { name: "Skirt Steak", price: 1.0, img: "img/13.jpg", quantCart: 0 },
+    { name: "Churros", price: 1.0, img: "img/14.jpg", quantCart: 0 },
+    { name: "Skewers", price: 1.0, img: "img/15.jpg", quantCart: 0 },
+    { name: "Salad", price: 1.0, img: "img/16.jpg", quantCart: 0 },
+    { name: "Ramen", price: 1.0, img: "img/17.jpg", quantCart: 0 },
+    { name: "Wings", price: 1.0, img: "img/18.jpg", quantCart: 0 },
+    { name: "Donuts", price: 1.0, img: "img/19.jpg", quantCart: 0 },
+    { name: "Fried Chicked", price: 1.0, img: "img/20.jpg", quantCart: 0 },
 ];
 
 let cartList = [];
 
-function addToShop(item){
-    if(shopList.includes(item)){
+function addToShop(item) {
+    if (shopList.includes(item)) {
         alert("Product already on list");
-    }
-    else {
+    } else {
         shopList.push(item);
     }
 }
@@ -57,30 +56,7 @@ console.log(nameDocument);
 let quantityInput;
 let count = 0;
 let quantity = 0;
-let subTotal = 0;
 let foodProduct = {};
-let foodList = [
-    "Spaghetti",
-    "Burger with fries",
-    "Steak",
-    "Meat Skewers",
-    "Vegan Pizza",
-    "Light Yogurt",
-    "Rainbow  Ice Cream",
-    "Shawarma",
-    "Chicken Salad",
-    "Ribs",
-    "Panini",
-    "Italian Pasta",
-    "Skirt Steak",
-    "Churros",
-    "Skewers",
-    "Salad",
-    "Ramen",
-    "Wings",
-    "Donuts",
-    "Fried Chicked",
-];
 
 let cart = document.querySelector(".cart");
 let cartCounter = cart.querySelector(".productCounter");
@@ -88,16 +64,10 @@ let showCart = document.querySelector(".cartContainer");
 let navBar = document.querySelector(".section");
 let product = document.getElementsByClassName("item");
 let itemContainer = document.querySelector(".items");
-let productList = document.querySelector(".content");
+let cartContent = document.querySelector(".content");
 let emptyContent = document.querySelector(".productList");
 
-navBar.addEventListener("click", function () {
-    if ("click") {
-        nameDocument = getDocumentName();
-    }
-});
 //console.log(product);
-
 
 /*********************************************************************************/
 //JavaScript File for index.html
@@ -110,32 +80,8 @@ navBar.addEventListener("click", function () {
 //Adding initial products to the html
 /*********************************************************************************/
 if (nameDocument == "index.html" || nameDocument == "") {
-
     for (let item of shopList) {
-        console.log(item.img);
         addProduct(item);
-    }
-    
-    /* Array.from(foodProduct);
-    foodProduct = Array.from(Object.entries(foodProduct));
-    foodProduct.push(["Enchiladas", { price: "$3", url: "www.google.com" }]);
-    console.log(foodProduct); */
-
-    //console.log(productsList);
-
-    for (let item of product) {
-        let button = item.querySelector(".addCart");
-        button.addEventListener("click", function () {
-            if (quantity == 0) {
-                cartCounter.style.display = "flex";
-            }
-            console.log(`This is the ${itemsInCart(quantity, button.id)}`);
-            if (itemsInCart(++quantity, button.id)) {
-                cartCounter.innerHTML = quantity;
-            } else {
-                quantity--;
-            }
-        });
     }
 }
 
@@ -219,8 +165,6 @@ function getDocumentName() {
 }
 clearCart();
 
-
-
 cart.addEventListener("click", function (e) {
     if (e.target.classList.contains("cart")) {
         showCart.style.contentVisibility = "visible";
@@ -232,56 +176,6 @@ cart.addEventListener("click", function (e) {
         cart.style.animation = "none";
     }
 });
-
-function clearCart() {
-    quantity = 0;
-    cartCounter.innerHTML = quantity;
-    cartCounter.style.display = "none";
-    itemsInCart(quantity);
-}
-
-function itemsInCart(counter, product) {
-    if (counter == 0) {
-        let list = document.createElement("li");
-        list.className = "newItem empty";
-        emptyContent.appendChild(list);
-        let img = document.createElement("img");
-        img.className = "imgList";
-        list.appendChild(img);
-        let text = document.createElement("span");
-        text.className = "name empty";
-        list.appendChild(text);
-        text.innerHTML = "Cart is empty";
-        list.style.flexFlow = "column nowrap";
-        img.style.width = "150px";
-        img.style.height = "150px";
-        img.style.backgroundImage = "url(img/shopping-cart-empty.png)";
-        img.style.backgroundSize = "100px";
-        img.style.backgroundPosition = "20px center";
-        list.style.color = "black";
-        text.style.filter = "opacity(0.2)";
-        text.style.marginBottom = "30px";
-        img.style.filter = "opacity(0.2)";
-        return;
-    } else if (counter > 0) {
-        if (counter == 1) {
-            document.querySelector(".empty").remove();
-            document.querySelector(".titles").style.contentVisibility =
-                "visible";
-            document.querySelector(".total").style.contentVisibility =
-                "visible";
-        }
-        if (Object.keys(cartList).includes(name)) {
-            alert("Product already in cart increse the quantity instead");
-            return false;
-        }
-        addItemToCart(product);
-        let total = document.querySelector(".totalPrice");
-        total.innerHTML = `$${sumTotal()}.00`;
-    }
-    return true;
-}
-
 
 //esta bien este
 function addProduct(item) {
@@ -316,11 +210,16 @@ function addProduct(item) {
 }
 /**************************************************************/
 
+//addItemToCart(shopList[1]);
 
 function addItemToCart(product) {
+    if (isOnCart(product)) {
+        alert("Product already in cart increse the quantity instead");
+        return false;
+    }
     let list = document.createElement("li");
     list.className = "newItem";
-    productList.appendChild(list);
+    cartContent.appendChild(list);
     let img = document.createElement("img");
     img.className = "imgList";
     list.appendChild(img);
@@ -338,30 +237,85 @@ function addItemToCart(product) {
     let price = document.createElement("span");
     price.className = "price";
     list.appendChild(price);
-    price.innerHTML = product.price;
+    price.innerHTML = `$${product.price}.00`;
     img.style.backgroundImage = `url(${product.img})`;
     product.quantCart++;
     cartList.push(product);
-    console.log(cartList);
+    return true;
 }
 
 function isOnList(identifier) {
-    for (let element in foodProduct) {
-        if (element == identifier) {
-            return true;
-        }
-    }
-    return false;
+    return shopList.includes(identifier);
 }
 
-console.log(cartList);
 
-function sumTotal(cartList) {
+function clearCart() {
+    let list = document.createElement("li");
+    list.className = "newItem empty";
+    emptyContent.appendChild(list);
+    let img = document.createElement("img");
+    img.className = "imgList";
+    list.appendChild(img);
+    let text = document.createElement("span");
+    text.className = "name empty";
+    list.appendChild(text);
+    text.innerHTML = "Cart is empty";
+    list.style.flexFlow = "column nowrap";
+    img.style.width = "150px";
+    img.style.height = "150px";
+    img.style.backgroundImage = "url(img/shopping-cart-empty.png)";
+    img.style.backgroundSize = "100px";
+    img.style.backgroundPosition = "20px center";
+    list.style.color = "black";
+    text.style.filter = "opacity(0.2)";
+    text.style.marginBottom = "30px";
+    img.style.filter = "opacity(0.2)";
+    quantity = 0;
+    cartCounter.innerHTML = quantity;
+    cartCounter.style.display = "none";
+}
+
+function isOnCart(product) {
+    return cartList.includes(product);
+}
+
+
+
+/*********************************************************************************/
+//Events
+/*********************************************************************************/
+
+//Event for add product to cart
+
+let btnAddCart = document.querySelectorAll(".addCart");
+
+for (let btn of btnAddCart) {
+    btn.addEventListener("click", function () {
+        let product = shopList.find((item) => item.name == btn.id);
+        let isDone = addItemToCart(product);
+        if (isDone) {
+            quantity++;
+            cartCounter.innerHTML = quantity;
+            cartCounter.style.display = "flex";
+            if (quantity == 1) {
+                document.querySelector(".empty").remove();
+                document.querySelector(".titles").style.contentVisibility =
+                    "visible";
+                document.querySelector(".titles").style.backgroundColor = "#1d47d31f";
+                document.querySelector(".total").style.contentVisibility =
+                    "visible";
+            }
+            document.querySelector(".total").innerHTML = `$${getTotal()}.00`;
+        }
+    });
+}
+
+/*********************************************************************************/
+
+function getTotal() {
     let total = 0;
-    for (let element in cartList) {
-        total +=
-            parseInt(cartList[element].input.value) *
-            parseInt(cartList[element].price);
+    for(let element of cartList){
+        total = total + (element.price * element.quantCart);
     }
     return total;
 }
