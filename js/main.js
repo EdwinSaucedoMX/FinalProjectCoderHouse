@@ -74,7 +74,6 @@ if (nameDocument == "login.html") {
     let btnLogin = document.querySelector(".btnLogin");
     let inputArrayPlaceholder = ["Name", "Price", "Url Image"];
     let btnAddProduct;
-    let arrayList = [];
 
     btnLogin.addEventListener("click", function () {
         let username = document.querySelector(".user").value;
@@ -118,13 +117,13 @@ if (nameDocument == "login.html") {
             let name = document.querySelector("#name").value;
             let price = document.querySelector("#price").value;
             let url = document.querySelector("#url").value;
-            arrayList.push({ [name]: { price, url } });
-            console.log(arrayList);
+            shopList.push({ name: name, price: price, img: url });
+            console.log(shopList);
         });
     }
 
     function deleteLastProduct() {
-        let lastProduct = arrayList.pop();
+        let lastProduct = shopList.pop();
         console.log(lastProduct);
         return lastProduct;
     }
