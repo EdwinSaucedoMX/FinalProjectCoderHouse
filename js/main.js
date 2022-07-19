@@ -7,6 +7,50 @@ o no, de antemano gracias */
 /*********************************************************************************/
 //Array of initial products
 /*********************************************************************************/
+class Product {
+    constructor(name, price, img) {
+        this.name = name;
+        this.price = price;
+        this.img = img;
+        this.quantCart = 0;
+    }
+}
+
+let shopList = [
+    {name :"Spaghetti", price: 1.00 , img: "img/1.jpg", quantCart : 0},
+    {name :"Burger with fries", price: 1.00 , img: "img/2.jpg", quantCart : 0},
+    {name :"Steak", price: 1.00 , img: "img/3.jpg", quantCart : 0},
+    {name :"Meat Skewers", price: 1.00 , img: "img/4.jpg", quantCart : 0},
+    {name :"Vegan Pizza", price: 1.00 , img: "img/5.jpg", quantCart : 0},
+    {name :"Light Yogurt", price: 1.00 , img: "img/6.jpg", quantCart : 0},
+    {name :"Rainbow  Ice Cream", price: 1.00 , img: "img/7.jpg", quantCart : 0},
+    {name :"Shawarma", price: 1.00 , img: "img/8.jpg", quantCart : 0},
+    {name :"Chicken Salad", price: 1.00 , img: "img/9.jpg", quantCart : 0},
+    {name :"Ribs", price: 1.00 , img: "img/10.jpg", quantCart : 0},
+    {name :"Panini", price: 1.00 , img: "img/11.jpg", quantCart : 0},
+    {name :"Italian Pasta", price: 1.00 , img: "img/12.jpg", quantCart : 0},
+    {name :"Skirt Steak", price: 1.00 , img: "img/13.jpg", quantCart : 0},
+    {name :"Churros", price: 1.00 , img: "img/14.jpg", quantCart : 0},
+    {name :"Skewers", price: 1.00 , img: "img/15.jpg", quantCart : 0},
+    {name :"Salad", price: 1.00 , img: "img/16.jpg", quantCart : 0},
+    {name :"Ramen", price: 1.00 , img: "img/17.jpg", quantCart : 0},
+    {name :"Wings", price: 1.00 , img: "img/18.jpg", quantCart : 0},
+    {name :"Donuts", price: 1.00 , img: "img/19.jpg", quantCart : 0},
+    {name :"Fried Chicked", price: 1.00 , img: "img/20.jpg", quantCart : 0}
+];
+
+let cartList = [];
+
+function addToShop(item){
+    if(shopList.includes(item)){
+        alert("Product already on list");
+    }
+    else {
+        shopList.push(item);
+    }
+}
+/************************************************************************************/
+
 let nameDocument = getDocumentName();
 console.log(nameDocument);
 
@@ -14,7 +58,6 @@ let quantityInput;
 let count = 0;
 let quantity = 0;
 let subTotal = 0;
-let cartList = [];
 let foodProduct = {};
 let foodList = [
     "Spaghetti",
@@ -68,14 +111,15 @@ navBar.addEventListener("click", function () {
 /*********************************************************************************/
 if (nameDocument == "index.html" || nameDocument == "") {
 
-    for (let item in foodList) {
+    for (let item of shopList) {
+        console.log(item.img);
         addProduct(item);
     }
     
-    Array.from(foodProduct);
+    /* Array.from(foodProduct);
     foodProduct = Array.from(Object.entries(foodProduct));
     foodProduct.push(["Enchiladas", { price: "$3", url: "www.google.com" }]);
-    console.log(foodProduct);
+    console.log(foodProduct); */
 
     //console.log(productsList);
 
@@ -85,7 +129,7 @@ if (nameDocument == "index.html" || nameDocument == "") {
             if (quantity == 0) {
                 cartCounter.style.display = "flex";
             }
-
+            console.log(`This is the ${itemsInCart(quantity, button.id)}`);
             if (itemsInCart(++quantity, button.id)) {
                 cartCounter.innerHTML = quantity;
             } else {
@@ -196,7 +240,7 @@ function clearCart() {
     itemsInCart(quantity);
 }
 
-function itemsInCart(counter, name) {
+function itemsInCart(counter, product) {
     if (counter == 0) {
         let list = document.createElement("li");
         list.className = "newItem empty";
@@ -231,13 +275,15 @@ function itemsInCart(counter, name) {
             alert("Product already in cart increse the quantity instead");
             return false;
         }
-        addItemToCart(name);
+        addItemToCart(product);
         let total = document.querySelector(".totalPrice");
         total.innerHTML = `$${sumTotal()}.00`;
     }
     return true;
 }
 
+
+//esta bien este
 function addProduct(item) {
     let container = document.createElement("div");
     let img = document.createElement("img");
@@ -251,10 +297,10 @@ function addProduct(item) {
     info.className = "child";
     name.className = "text";
     price.className = "text";
-    let cost = (price.innerHTML = `$${Math.floor(Math.random() * 10 + 1)}`);
-    let identifier = (name.innerHTML = foodList[item]);
+    price.innerHTML = `$${item.price}.00`;
+    name.innerHTML = item.name;
     button.className = `addCart`;
-    button.id = `${identifier}`;
+    button.id = `${item.name}`;
     button.innerHTML = "Add to cart";
 
     itemContainer.appendChild(container);
@@ -266,18 +312,12 @@ function addProduct(item) {
     info.appendChild(button);
 
     img.style.contentVisibility = "visible";
-    img.style.backgroundImage = `url(/img/${++count}.jpg)`;
-    let url = img.style.backgroundImage;
-    if (identifier == undefined) {
-        alert("Enter a valid product");
-    } else if (isOnList(identifier)) {
-        alert("Product already on list");
-    }
-    foodProduct[name.innerHTML] = { price: cost, img: url };
-    console.log(foodProduct[name.innerHTML].price);
+    img.style.backgroundImage = `url(${item.img})`;
 }
+/**************************************************************/
 
-function addItemToCart(identifier) {
+
+function addItemToCart(product) {
     let list = document.createElement("li");
     list.className = "newItem";
     productList.appendChild(list);
@@ -287,7 +327,7 @@ function addItemToCart(identifier) {
     let text = document.createElement("span");
     text.className = "name";
     list.appendChild(text);
-    text.innerHTML = identifier;
+    text.innerHTML = product.name;
     let input = document.createElement("input");
     input.className = "quantity";
     input.type = "number";
@@ -298,13 +338,10 @@ function addItemToCart(identifier) {
     let price = document.createElement("span");
     price.className = "price";
     list.appendChild(price);
-    price.innerHTML = foodProduct[identifier].price;
-    img.style.backgroundImage = `${foodProduct[identifier].img}`;
-    cartList[identifier] = {
-        quantity: 1,
-        input: input,
-        price: price.innerHTML,
-    };
+    price.innerHTML = product.price;
+    img.style.backgroundImage = `url(${product.img})`;
+    product.quantCart++;
+    cartList.push(product);
     console.log(cartList);
 }
 
