@@ -335,7 +335,7 @@ ul {
     display: flex;
     flex-flow: row nowrap;
     flex-grow: 0;
-    height: 50px;
+    height: 0;
     justify-content: space-between;
     padding: 0;
     text-align: center;

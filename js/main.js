@@ -51,7 +51,7 @@ let cartCounter = cart.querySelector(".productCounter");
 let showCart = document.querySelector(".cartContainer");
 let itemContainer = document.querySelector(".items");
 let cartContent = document.querySelector(".content");
-let emptyContent = document.querySelector(".productList");
+
 
 //console.log(product);
 
@@ -204,6 +204,7 @@ function addItemToCart(product) {
         return false;
     }
     let list = document.createElement("li");
+    
     list.className = "newItem";
     cartContent.appendChild(list);
     let img = document.createElement("img");
@@ -239,9 +240,15 @@ function isOnList(identifier) {
 
 
 function clearCart() {
+    cartList.forEach(function (item) {
+        item.quantCart = 0;
+    });
+    cartList = [];
+    cartContent.innerHTML = "";
+    document.querySelector(".total").innerHTML = "$0.00";
     let list = document.createElement("li");
     list.className = "newItem empty";
-    emptyContent.appendChild(list);
+    cartContent.appendChild(list);
     let img = document.createElement("img");
     img.className = "imgList";
     list.appendChild(img);
@@ -262,6 +269,11 @@ function clearCart() {
     quantity = 0;
     cartCounter.innerHTML = quantity;
     cartCounter.style.display = "none";
+    cartContent.style.borderRadius = "0 0 20px 20px";
+    document.querySelector(".titles").style.contentVisibility = "hidden";
+    document.querySelector(".titles").style.backgroundColor = "#ffffff";
+    document.querySelector(".titles").style.height = "0";
+    document.querySelector(".total").style.height = "0";
 }
 
 function isOnCart(product) {
@@ -290,11 +302,15 @@ for (let btn of btnAddCart) {
                 document.querySelector(".empty").remove();
                 document.querySelector(".titles").style.contentVisibility =
                     "visible";
+                document.querySelector(".titles").style.height =
+                    "50px";
                 document.querySelector(".titles").style.backgroundColor = "#1d47d31f";
                 document.querySelector(".total").style.contentVisibility =
                     "visible";
             }
             document.querySelector(".total").innerHTML = `$${getTotal()}.00`;
+            document.querySelector(".total").style.height = '30px';
+            
         }
     });
 }
