@@ -258,7 +258,7 @@ function clearCart() {
     list.style.flexFlow = "column nowrap";
     img.style.width = "150px";
     img.style.height = "150px";
-    img.style.backgroundImage = "url('img/shopping-cart-empty.png')";
+    img.style.backgroundImage = "url('img/cart/shopping-cart-empty.png')";
     img.style.backgroundSize = "100px";
     img.style.backgroundPosition = "20px center";
     list.style.color = "black";
