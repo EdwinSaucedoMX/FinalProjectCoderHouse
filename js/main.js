@@ -10,7 +10,7 @@ class Product {
     }
 }
 
-let  = [
+let shopList  = [
     { name: "Spaghetti", price: 1.0, img: "img/1.jpg", quantCart: 0 },
     { name: "Burger with fries", price: 1.0, img: "img/2.jpg", quantCart: 0 },
     { name: "Steak", price: 1.0, img: "img/3.jpg", quantCart: 0 },
