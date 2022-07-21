@@ -10,27 +10,27 @@ class Product {
     }
 }
 
-let shopList = [
-    { name: "Spaghetti", price: 1.0, img: "img/shopList/1.jpg", quantCart: 0 },
-    { name: "Burger with fries", price: 1.0, img: "img/shopList/2.jpg", quantCart: 0 },
-    { name: "Steak", price: 1.0, img: "img/shopList/3.jpg", quantCart: 0 },
-    { name: "Meat Skewers", price: 1.0, img: "img/shopList/4.jpg", quantCart: 0 },
-    { name: "Vegan Pizza", price: 1.0, img: "img/shopList/5.jpg", quantCart: 0 },
-    { name: "Light Yogurt", price: 1.0, img: "imgshopList//6.jpg", quantCart: 0 },
-    { name: "Rainbow  Ice Cream", price: 1.0, img: "img/shopList/7.jpg", quantCart: 0 },
-    { name: "Shawarma", price: 1.0, img: "img/shopList/8.jpg", quantCart: 0 },
-    { name: "Chicken Salad", price: 1.0, img: "img/shopList/9.jpg", quantCart: 0 },
-    { name: "Ribs", price: 1.0, img: "img/shopList/10.jpg", quantCart: 0 },
-    { name: "Panini", price: 1.0, img: "img/shopList/11.jpg", quantCart: 0 },
-    { name: "Italian Pasta", price: 1.0, img: "img/shopList/12.jpg", quantCart: 0 },
-    { name: "Skirt Steak", price: 1.0, img: "img/shopList/13.jpg", quantCart: 0 },
-    { name: "Churros", price: 1.0, img: "img/shopList/14.jpg", quantCart: 0 },
-    { name: "Skewers", price: 1.0, img: "img/shopList/15.jpg", quantCart: 0 },
-    { name: "Salad", price: 1.0, img: "img/shopList/16.jpg", quantCart: 0 },
-    { name: "Ramen", price: 1.0, img: "img/shopList/17.jpg", quantCart: 0 },
-    { name: "Wings", price: 1.0, img: "img/shopList/18.jpg", quantCart: 0 },
-    { name: "Donuts", price: 1.0, img: "img/shopList/19.jpg", quantCart: 0 },
-    { name: "Fried Chicked", price: 1.0, img: "img/shopList/20.jpg", quantCart: 0 },
+let  = [
+    { name: "Spaghetti", price: 1.0, img: "img/1.jpg", quantCart: 0 },
+    { name: "Burger with fries", price: 1.0, img: "img/2.jpg", quantCart: 0 },
+    { name: "Steak", price: 1.0, img: "img/3.jpg", quantCart: 0 },
+    { name: "Meat Skewers", price: 1.0, img: "img/4.jpg", quantCart: 0 },
+    { name: "Vegan Pizza", price: 1.0, img: "img/5.jpg", quantCart: 0 },
+    { name: "Light Yogurt", price: 1.0, img: "img/6.jpg", quantCart: 0 },
+    { name: "Rainbow  Ice Cream", price: 1.0, img: "img/7.jpg", quantCart: 0 },
+    { name: "Shawarma", price: 1.0, img: "img/8.jpg", quantCart: 0 },
+    { name: "Chicken Salad", price: 1.0, img: "img/9.jpg", quantCart: 0 },
+    { name: "Ribs", price: 1.0, img: "img/10.jpg", quantCart: 0 },
+    { name: "Panini", price: 1.0, img: "img/11.jpg", quantCart: 0 },
+    { name: "Italian Pasta", price: 1.0, img: "img/12.jpg", quantCart: 0 },
+    { name: "Skirt Steak", price: 1.0, img: "img/13.jpg", quantCart: 0 },
+    { name: "Churros", price: 1.0, img: "img/14.jpg", quantCart: 0 },
+    { name: "Skewers", price: 1.0, img: "img/15.jpg", quantCart: 0 },
+    { name: "Salad", price: 1.0, img: "img/16.jpg", quantCart: 0 },
+    { name: "Ramen", price: 1.0, img: "img/17.jpg", quantCart: 0 },
+    { name: "Wings", price: 1.0, img: "img/18.jpg", quantCart: 0 },
+    { name: "Donuts", price: 1.0, img: "img/19.jpg", quantCart: 0 },
+    { name: "Fried Chicked", price: 1.0, img: "img/20.jpg", quantCart: 0 },
 ];
 
 let cartList = [];
@@ -258,7 +258,7 @@ function clearCart() {
     list.style.flexFlow = "column nowrap";
     img.style.width = "150px";
     img.style.height = "150px";
-    img.style.backgroundImage = "url('img/cart/shopping-cart-empty.png')";
+    img.style.backgroundImage = "url('img/shopping-cart-empty.png')";
     img.style.backgroundSize = "100px";
     img.style.backgroundPosition = "20px center";
     list.style.color = "black";
