@@ -191,7 +191,7 @@ function addProduct(item) {
     info.appendChild(button);
 
     img.style.contentVisibility = "visible";
-    img.style.backgroundImage = `url(${item.img})`;
+    img.style.backgroundImage = `url('${item.img}')`;
 }
 /**************************************************************/
 
@@ -226,7 +226,7 @@ function addItemToCart(product) {
     price.id = `price${product.name}`;
     list.appendChild(price);
     price.innerHTML = `$${product.price}.00`;
-    img.style.backgroundImage = `url(${product.img})`;
+    img.style.backgroundImage = `url('${product.img}')`;
     product.quantCart++;
     cartList.push(product);
     addEventInput(input);
@@ -258,7 +258,7 @@ function clearCart() {
     list.style.flexFlow = "column nowrap";
     img.style.width = "150px";
     img.style.height = "150px";
-    img.style.backgroundImage = "url(img/shopping-cart-empty.png)";
+    img.style.backgroundImage = "url('img/shopping-cart-empty.png')";
     img.style.backgroundSize = "100px";
     img.style.backgroundPosition = "20px center";
     list.style.color = "black";

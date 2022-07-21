@@ -28,7 +28,7 @@ html {
     background-attachment: fixed;
     background-blend-mode: luminosity;
     background-color: #1d47d3;
-    background-image: url(img/background.jpg);
+    background-image: url('img/background.jpg');
     background-repeat: repeat;
     background-size: 400px;
     margin: 0;
@@ -110,7 +110,7 @@ ul {
     padding-inline-start: 0;
 }
 .cart {
-    background-image: url(img/shopping-cart.png);
+    background-image: url('img/shopping-cart.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -345,7 +345,7 @@ ul {
 }
 
 .imgList {
-    background-image: url("/img/1.jpg");
+    background-image: url("img/1.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -558,7 +558,7 @@ ul {
     flex-grow: 4;
 }
 .title {
-    content: url(img/title.png);
+    content: url('img/title.png');
     content-visibility: visible;
     margin: 50px 0;
     position: relative;
