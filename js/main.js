@@ -11,7 +11,7 @@ class Product {
 }
 
 let shopList  = [
-    { name: "Spaghetti", price: 1.0, img: "/img/1.jpg", quantCart: 0 },
+    { name: "Spaghetti", price: 1.0, img: "img/1.jpg", quantCart: 0 },
     { name: "Burger with fries", price: 1.0, img: "img/2.jpg", quantCart: 0 },
     { name: "Steak", price: 1.0, img: "img/3.jpg", quantCart: 0 },
     { name: "Meat Skewers", price: 1.0, img: "img/4.jpg", quantCart: 0 },

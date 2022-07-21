@@ -558,7 +558,7 @@ ul {
     flex-grow: 4;
 }
 .title {
-    content: url('img/root/title.png');
+    content: url('img/title.png');
     content-visibility: visible;
     margin: 50px 0;
     position: relative;
