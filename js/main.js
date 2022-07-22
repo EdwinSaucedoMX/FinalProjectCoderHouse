@@ -11,30 +11,30 @@ class Product {
 }
 
 let shopList  = [
-    { name: "Spaghetti", price: 1.0, img: "img/1.jpg", quantCart: 0 },
+    { name: "Spaghetti", price: 5.0, img: "img/1.jpg", quantCart: 0 },
     { name: "Burger with fries", price: 1.0, img: "img/2.jpg", quantCart: 0 },
-    { name: "Steak", price: 1.0, img: "img/3.jpg", quantCart: 0 },
-    { name: "Meat Skewers", price: 1.0, img: "img/4.jpg", quantCart: 0 },
-    { name: "Vegan Pizza", price: 1.0, img: "img/5.jpg", quantCart: 0 },
+    { name: "Steak", price: 8.0, img: "img/3.jpg", quantCart: 0 },
+    { name: "Meat Skewers", price: 10.0, img: "img/4.jpg", quantCart: 0 },
+    { name: "Vegan Pizza", price: 15.0, img: "img/5.jpg", quantCart: 0 },
     { name: "Light Yogurt", price: 1.0, img: "img/6.jpg", quantCart: 0 },
     { name: "Rainbow  Ice Cream", price: 1.0, img: "img/7.jpg", quantCart: 0 },
-    { name: "Shawarma", price: 1.0, img: "img/8.jpg", quantCart: 0 },
-    { name: "Chicken Salad", price: 1.0, img: "img/9.jpg", quantCart: 0 },
-    { name: "Ribs", price: 1.0, img: "img/10.jpg", quantCart: 0 },
+    { name: "Shawarma", price: 5.0, img: "img/8.jpg", quantCart: 0 },
+    { name: "Chicken Salad", price: 10.0, img: "img/9.jpg", quantCart: 0 },
+    { name: "Ribs", price: 15.0, img: "img/10.jpg", quantCart: 0 },
     { name: "Panini", price: 1.0, img: "img/11.jpg", quantCart: 0 },
-    { name: "Italian Pasta", price: 1.0, img: "img/12.jpg", quantCart: 0 },
-    { name: "Skirt Steak", price: 1.0, img: "img/13.jpg", quantCart: 0 },
+    { name: "Italian Pasta", price: 3.0, img: "img/12.jpg", quantCart: 0 },
+    { name: "Skirt Steak", price: 5.0, img: "img/13.jpg", quantCart: 0 },
     { name: "Churros", price: 1.0, img: "img/14.jpg", quantCart: 0 },
-    { name: "Skewers", price: 1.0, img: "img/15.jpg", quantCart: 0 },
-    { name: "Salad", price: 1.0, img: "img/16.jpg", quantCart: 0 },
-    { name: "Ramen", price: 1.0, img: "img/17.jpg", quantCart: 0 },
-    { name: "Wings", price: 1.0, img: "img/18.jpg", quantCart: 0 },
+    { name: "Skewers", price: 5.0, img: "img/15.jpg", quantCart: 0 },
+    { name: "Salad", price: 3.0, img: "img/16.jpg", quantCart: 0 },
+    { name: "Ramen", price: 8.0, img: "img/17.jpg", quantCart: 0 },
+    { name: "Wings", price: 10.0, img: "img/18.jpg", quantCart: 0 },
     { name: "Donuts", price: 1.0, img: "img/19.jpg", quantCart: 0 },
-    { name: "Fried Chicked", price: 1.0, img: "img/20.jpg", quantCart: 0 },
+    { name: "Fried Chicked", price: 8.0, img: "img/20.jpg", quantCart: 0 },
 ];
 
 let cartList = [];
-
+let cartListNode = [];
 
 /************************************************************************************/
 
@@ -97,12 +97,22 @@ if (nameDocument == "login.html") {
         for (let i = 0; i < 3; i++) {
             let input = document.createElement("input");
             input.className = `inputAddProduct`;
-            input.id = inputArrayPlaceholder[i].toLowerCase();
-            input.placeholder = inputArrayPlaceholder[i];
-            addProductContainer.appendChild(input);
-            if (input.id == "url image") {
+            if (i == 2) {
+                let input = document.createElement("div");
+                input.className = `inputAddProduct`;
                 input.id = "url";
+                let btnImg = document.createElement("input");
+                btnImg.type = "file";
+                btnImg.className = "btnImg";
+                btnImg.setAttribute("accept", "image/*");
+                console.log(btnImg.name);
+                addProductContainer.appendChild(input);
+                input.appendChild(btnImg);
+                break;
             }
+            input.placeholder = inputArrayPlaceholder[i];
+            input.id = inputArrayPlaceholder[i].toLowerCase();
+            addProductContainer.appendChild(input);
         }
         btnAddProduct = document.createElement("button");
         btnAddProduct.className = "btnAddProduct";
@@ -115,12 +125,14 @@ if (nameDocument == "login.html") {
         btnAddProduct.addEventListener("click", function () {
             let name = document.querySelector("#name").value;
             let price = document.querySelector("#price").value;
-            let url = document.querySelector("#url").value;
+            let url = document.querySelector("#url input[type='file']").value;
+            url = url.substring(url.lastIndexOf("\\") + 1);
             if (name == "" || price == "" || url == "") {
                 alert("Please enter all the fields");
             }
             else{
-                let product = new Product(name, price, url);
+                let product = new Product(name, price, `img/${url}`);
+                console.log(product);
                 shopList.push(product);
                 console.log(shopList);
             }
@@ -202,33 +214,34 @@ function addItemToCart(product) {
         alert("Product already in cart increse the quantity instead");
         return false;
     }
-    let list = document.createElement("li");
+    let htmlNode = document.createElement("li");
     
-    list.className = "newItem";
-    cartContent.appendChild(list);
+    htmlNode.className = "newItem";
+    cartContent.appendChild(htmlNode);
     let img = document.createElement("img");
     img.className = "imgList";
-    list.appendChild(img);
+    htmlNode.appendChild(img);
     let text = document.createElement("span");
     text.className = "name";
-    list.appendChild(text);
+    htmlNode.appendChild(text);
     text.innerHTML = product.name;
     let input = document.createElement("input");
     input.className = "quantity";
     input.id = `${product.name}`;
     input.type = "number";
-    input.min = "1";
+    input.min = "0";
     input.max = "10";
     input.value = "1";
-    list.appendChild(input);
+    htmlNode.appendChild(input);
     let price = document.createElement("span");
     price.className = "price";
     price.id = `price${product.name}`;
-    list.appendChild(price);
+    htmlNode.appendChild(price);
     price.innerHTML = `$${product.price}.00`;
     img.style.backgroundImage = `url('${product.img}')`;
     product.quantCart++;
     cartList.push(product);
+    cartListNode.push(htmlNode);
     addEventInput(input);
     return true;
 }
@@ -245,6 +258,7 @@ function clearCart() {
     cartList = [];
     cartContent.innerHTML = "";
     document.querySelector(".total").innerHTML = "$0.00";
+    document.querySelector(".total").style.display = "none";
     let list = document.createElement("li");
     list.className = "newItem empty";
     cartContent.appendChild(list);
@@ -290,6 +304,7 @@ function isOnCart(product) {
 let btnAddCart = document.querySelectorAll(".addCart");
 
 for (let btn of btnAddCart) {
+    addAllButtons(btn);
     btn.addEventListener("click", function () {
         let product = shopList.find((item) => item.name == btn.id);
         let isDone = addItemToCart(product);
@@ -304,10 +319,10 @@ for (let btn of btnAddCart) {
                 document.querySelector(".titles").style.height =
                     "50px";
                 document.querySelector(".titles").style.backgroundColor = "#1d47d31f";
-                document.querySelector(".total").style.contentVisibility =
-                    "visible";
+                document.querySelector(".total").style.display =
+                    "block";
             }
-            document.querySelector(".total").innerHTML = `$${getTotal()}.00`;
+            getTotal();
             document.querySelector(".total").style.height = '30px';
             
         }
@@ -321,15 +336,23 @@ function getTotal() {
     for(let element of cartList){
         total = total + (element.price * element.quantCart);
     }
-    return total;
+    document.querySelector(".total").innerHTML = `$${total}.00`;
 }
 
 function addEventInput (input){
     input.addEventListener("change", function(){
         let product = cartList.find((item) => item.name == input.id);
         product.quantCart = input.value;
-        document.querySelector(".total").innerHTML = `$${getTotal()}.00`;
-        document.getElementById(`price${input.id}`).innerHTML = `$${product.price * product.quantCart}.00`;
+        if(input.value == 0){
+            removeItemFromCart(product);
+        }
+        else if (input.value > 10){
+            alert("You can't add more than 10 items");
+            input.value = "";
+        }
+        else{
+            getTotal();
+        }
     });
 }
 
@@ -338,5 +361,28 @@ function addToShop(item) {
         alert("Product already on list");
     } else {
         shopList.push(item);
+    }
+}
+
+function addAllButtons(button) {
+    button.addEventListener("click", function (e) {
+        button.style.animation = "increaseButton .25s ease-in-out normal";
+        setTimeout(function () {
+            button.style.animation = "";
+        }, 250);
+    });
+}
+
+function removeItemFromCart(product){
+    cartListNode.forEach(function(item){
+        if(item.innerHTML.includes(product.name)){
+            cartContent.removeChild(item);
+            cartListNode.splice(cartListNode.indexOf(item), 1);
+            cartList.splice(cartList.indexOf(product), 1);
+        }
+    });
+    getTotal();
+    if(cartList.length == 0){
+        clearCart();
     }
 }

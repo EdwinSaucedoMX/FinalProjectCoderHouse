@@ -9,6 +9,7 @@ Edwin Donaldo Saucedo Vazquez  Clase Javascript 30435 */
     text-align: center;
 }
 
+
 * {
     font-family: "Open Sans", sans-serif;
     font-size: 18px;
@@ -551,7 +552,6 @@ ul {
     z-index: 0;
 }
 .total{
-    content-visibility: hidden;
     background-color: #1d47d31f;
 }
 .text {
@@ -564,6 +564,35 @@ ul {
     position: relative;
     transform: skewY(-10deg);
     z-index: 0;
+}
+
+#url {
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#url::before {
+    color: #8b62e9;
+    background-color: #ffffff;
+    content: "Choose a File";
+    height: 30px;
+    width: 250px;
+    border-radius: 20px;
+    position: absolute;
+    text-align: center;
+}
+#url:hover::before {
+    background-color: #1d47d3;
+    color: #ffffff;
+}
+
+#url input[type="file"] {
+    opacity: 0;
+    width: 200px;
+    height: 30px;
+    display: inline-block;
 }
 
 @media screen and (max-width: 600px) {
@@ -613,5 +642,17 @@ ul {
     100% {
         font-size: 25px;
         transform: translateY(-1.2px);
+    }
+}
+
+@keyframes increaseButton {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
     }
 }
