@@ -9,6 +9,10 @@ class Product {
         this.quantCart = 0;
     }
 }
+let index = 0;
+let isReady = false;
+let nextProduct;
+let progress;
 
 let shopList  = [
     { name: "Spaghetti", price: 5.0, img: "img/1.jpg", quantCart: 0 },
@@ -63,7 +67,6 @@ if (nameDocument == "index.html" || nameDocument == "") {
     for (let item of shopList) {
         addProduct(item);
     }
-
     //DOM
     let top = document.querySelector(".top");
     let details = document.querySelector(".details");
@@ -79,16 +82,16 @@ if (nameDocument == "index.html" || nameDocument == "") {
         }
         return parseInt(otherNumber);
     }
-
+    
     let number = parseInt(Math.random()*20);
     let topList = [];
     topList.push(shopList[number]);
     topList.push(shopList[nextOne(number)]);
     topList.push(shopList[nextOne(number)]);
     console.log(topList);
-
-    let index = 0;
-
+    
+    
+    
     let name = document.createElement('span');
     let price = document.createElement('span');
     name.innerHTML = topList[index].name
@@ -97,28 +100,36 @@ if (nameDocument == "index.html" || nameDocument == "") {
     details.appendChild(price);
     top.style.backgroundImage = `url(${topList[index].img})`;
 
+    progress = document.querySelectorAll('progress');
+    
+    nextProduct = () => {
+        progress[index].value = 0;
+        index = queueCircle(++index, topList.length);
+        console.log(index);
+        name.innerHTML = topList[index].name;
+        price.innerHTML = `$ ${topList[index].price}`;
+        top.style.backgroundImage = `url(${topList[index].img})`;
+    };
+
     nextLeft.addEventListener('click', () => {
-        index = index - 1 < 0 ? topList.length - 1 : --index;
+        progress[index].value = 0;
+        index = queueCircle(--index, topList.length);
         console.log(index);
         name.innerHTML = topList[index].name;
         price.innerHTML = `$ ${topList[index].price}`;
         top.style.backgroundImage = `url(${topList[index].img})`;
     });
     
-
-    nextRight.addEventListener('click', () => {
-        index = index + 1 > topList.length - 1 ? 0  : ++index;
-        console.log(index);
-        name.innerHTML = topList[index].name;
-    price.innerHTML = `$ ${topList[index].price}`;
-    top.style.backgroundImage = `url(${topList[index].img})`;
-    });
+    
+    nextRight.addEventListener('click', nextProduct);
 
     let button = document.querySelector(".topButton");
     addAllButtons(button);
     button.addEventListener('click', () =>{
         addButtonToCart(topList[index].name)
     })
+
+    
 }
 
 /*********************************************************************************/
@@ -331,7 +342,7 @@ function clearCart() {
     img.style.backgroundImage = "url('img/shopping-cart-empty.png')";
     img.style.backgroundSize = "100px";
     img.style.backgroundPosition = "20px center";
-    list.style.color = "black";
+    list.style.color = "var(--sixth)";
     text.style.filter = "opacity(0.2)";
     text.style.marginBottom = "30px";
     img.style.filter = "opacity(0.2)";
@@ -340,7 +351,7 @@ function clearCart() {
     cartCounter.style.display = "none";
     cartContent.style.borderRadius = "0 0 20px 20px";
     document.querySelector(".titles").style.contentVisibility = "hidden";
-    document.querySelector(".titles").style.backgroundColor = "#ffffff";
+    document.querySelector(".titles").style.backgroundColor = "var(--first)";
     document.querySelector(".titles").style.height = "0";
     document.querySelector(".total").style.height = "0";
 }
@@ -444,7 +455,7 @@ function addButtonToCart(name) {
                     "visible";
                 document.querySelector(".titles").style.height =
                     "50px";
-                document.querySelector(".titles").style.backgroundColor = "#1d47d31f";
+                document.querySelector(".titles").style.backgroundColor = "var(--seventh)";
                 document.querySelector(".total").style.display =
                     "block";
             }
@@ -452,4 +463,30 @@ function addButtonToCart(name) {
             document.querySelector(".total").style.height = '30px';
             
         }
+}
+
+setTimeout(function(){
+    console.log('Ready');
+    isReady = true;
+}, 10000);
+
+
+if(nameDocument == '' || nameDocument == 'index.html'){
+    
+    setInterval(function(){
+        progress[index].value++
+        if(progress[index].value == 100){
+            nextProduct();
+        }
+    },70);
+}
+
+function queueCircle(index, length){
+    if(index < 0){
+        index = length - 1;
+    }
+    else if (index >= length){
+        index = 0;
+    }
+    return index;
 }
