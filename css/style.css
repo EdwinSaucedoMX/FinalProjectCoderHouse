@@ -615,7 +615,11 @@ progress {
 .items {
     position: relative;
     z-index: 0;
-    background: radial-gradient(circle, var(--first) 0%, var(--fifth) 60%);
+    background: #ffffffcb;
+}
+
+.item{
+    outline: var(--second) solid 4px;
 }
 
 .landscape {
