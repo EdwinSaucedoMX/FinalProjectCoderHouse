@@ -4,16 +4,17 @@ Edwin Donaldo Saucedo Vazquez  Clase Javascript 30435 */
 @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@800&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
 :root {
-    --first : #ffffff;
-    --second : #1d47d3;
+    --first: #ffffff;
+    --second: #1d47d3;
     --third: #01038b;
     --fourth: #8557f1;
     --fifth: #a47ffc;
     --sixth: #000000;
     --seventh: #1d47d31f;
+    
 }
 
-::placeholder{
+::placeholder {
     color: var(--sixth);
     opacity: 0.35;
     text-align: center;
@@ -21,12 +22,14 @@ Edwin Donaldo Saucedo Vazquez  Clase Javascript 30435 */
 
 * {
     font-family: "Open Sans", sans-serif;
+    box-sizing: border-box;
     font-size: 18px;
     font-weight: 900;
     margin: 0;
     padding: 0;
     position: relative;
     z-index: 0;
+    user-select: none;
 }
 
 button {
@@ -41,38 +44,36 @@ button {
     font-size: 15px;
     font-weight: bolder;
     height: fit-content;
+    height: 20px;
     margin: 10px 0;
     position: relative;
     width: fit-content;
-    z-index: 0;
     width: 90%;
-    height: 20px;
+    z-index: 0;
 }
 
-
-
 a {
-    text-decoration: none;
     color: var(--first);
+    text-decoration: none;
 }
 
 h1 {
-    margin: 0;
-    top: 10px;
-    text-align: center;
+    align-self: center;
+    background-color: var(--fourth);
     color: var(--first);
     font-size: 30px;
-    background-color: var(--fourth);
-    width: 100%;
-    align-self: center;
+    margin: 0;
+    text-align: center;
     text-shadow: var(--black) 5px 5px 10px;
+    top: 10px;
+    width: 100%;
 }
 
 html {
     background-attachment: fixed;
     background-blend-mode: luminosity;
     background-color: var(--second);
-    background-image: url('/img/background.jpg');
+    background-image: url("/img/background.jpg");
     background-repeat: repeat;
     background-size: 400px;
     margin: 0;
@@ -124,53 +125,83 @@ img:hover {
     z-index: 0;
 }
 
-
-
 ul {
     margin-block-end: 0;
     margin-block-start: 0;
     padding-inline-start: 0;
 }
 
-
 .topButton {
     order: 3;
 }
 
-.bar {
-    position: absolute;
-    top: 10px;
+#alertBox {
+    align-items: flex-start;
+    background-color: transparent;
+    bottom: 0;
+    display: none;
+    flex-flow: row wrap;
+    height: 100vh;
+    justify-content: center;
+    padding: 0 0;
+    pointer-events: none;
+    position: fixed;
+    transition: all 1.5s ease-in-out;
+    width: 100vw;
     z-index: 1;
+}
+
+#alert {
+    align-items: center;
+    background-color: var(--first);
+    border-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+        rgba(0, 0, 0, 0.05) 0px 5px 0px;
+    color: #01038b;
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+    justify-content: center;
+    margin: 30px 0;
+    position: fixed;
+    text-align: center;
+    width: 300px;
+}
+
+.bar {
     display: flex;
     flex-flow: row nowrap;
     flex-grow: 1;
-    width: 100%;
     justify-content: center;
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    z-index: 1;
 }
 
 progress {
     -webkit-appearance: none;
-    margin: 0 10px;
-    flex-grow: 1;
-    width: 100%;
-    max-width: 100px;
-    height: 12px;
     cursor: pointer;
+    flex-grow: 1;
+    height: 12px;
+    margin: 0 10px;
+    max-width: 100px;
+    width: 100%;
 }
 
 ::-webkit-progress-bar {
-    border-radius: 300px;
     background-color: #00000041;
+    border-radius: 300px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
         rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 
-::-webkit-progress-value{
-    border-radius: 300px;
+::-webkit-progress-value {
     background-color: #ffffff;
+    border-radius: 300px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
         rgba(0, 0, 0, 0.05) 0px 5px 0px;
-    
 }
 
 .container {
@@ -191,15 +222,15 @@ progress {
     background-color: transparent;
     box-shadow: none;
     flex-flow: column nowrap;
+    height: auto;
+    max-height: 400px;
     position: relative;
     width: 100%;
     z-index: 1;
-    height: auto;
-    max-height: 400px;
 }
 
 .cart {
-    background-image: url('/img/shopping-cart.png');
+    background-image: url("/img/shopping-cart.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -240,94 +271,96 @@ progress {
     z-index: 1;
 }
 
-.iconsCart{
+.iconsCart {
     all: unset;
-    flex-grow: 0;
-    display: flex;
-    position: absolute;
-    height: 30px;
     background-color: var(--second);
-    color: var(--first);
-    width: 100%;
     border-radius: 20px 20px 0 0;
+    color: var(--first);
+    display: flex;
+    flex-grow: 0;
+    height: 30px;
     justify-content: space-between;
+    position: relative;
+    width: 100%;
 }
 
-.iconsCart span{
+.iconsCart span {
     margin: 0 30px;
 }
 
-.clear:hover{
+.clear:hover {
     color: #ffffff80;
     cursor: pointer;
 }
 
-.close{
+
+
+.close {
     color: red;
     cursor: pointer;
 }
 
-.close:hover{
+.close:hover {
     color: var(--first);
 }
 
 .login {
-    height: 500px;
-    min-width: 360px;
-    border-radius: 20px;
-    background-color: var(--fourth);
     align-items: center;
-    justify-content: space-evenly;
+    background-color: var(--fourth);
+    border-radius: 20px;
     display: flex;
     flex-flow: column nowrap;
+    height: 500px;
+    justify-content: space-evenly;
+    min-width: 360px;
 }
 .loginContent {
-    height: 500px;
-    min-width: 360px;
-    border-radius: 20px;
-    background-color: var(--fourth);
     align-items: center;
-    justify-content: space-evenly;
+    background-color: var(--fourth);
+    border-radius: 20px;
     display: flex;
     flex-flow: column nowrap;
+    height: 500px;
+    justify-content: space-evenly;
+    min-width: 360px;
 }
 
 .btnAddProduct {
-    max-height: 30px;
     font-size: 18px;
+    max-height: 30px;
     width: 200px;
 }
 
-.containerLogin input{
-    border-radius: 20px;
+.containerLogin input {
     border: none;
+    border-radius: 20px;
     height: 30px;
     text-align: center;
 }
 
-.login .btnLogin{
+.login .btnLogin {
+    font-size: 18px;
     max-height: 30px;
     width: 100px;
-    font-size: 18px;
 }
 
-.imgLogin{
+.imgLogin {
     all: unset;
     background-color: var(--second);
-    width: 200px;
-    max-height: 200px;
     border-radius: 50%;
+    max-height: 200px;
+    width: 200px;
 }
-.imgLogin:hover{
-    filter: none;
+.imgLogin:hover {
     cursor: default;
+    filter: none;
 }
 
-
-
-.containerLogin{
+.containerLogin {
     align-content: space-around;
     background-color: transparent;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+        rgba(0, 0, 0, 0.05) 0px 5px 10px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
@@ -335,25 +368,23 @@ progress {
     position: relative;
     width: auto;
     z-index: 0;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
-        rgba(0, 0, 0, 0.05) 0px 5px 10px;
 }
 
-.content{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-flow: column nowrap;
+.content {
+    align-content: flex-start;
     background-color: var(--first);
     border-radius: 0;
-    width: 100%;
-    max-height: 300px;
-    min-height: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    align-content: flex-start;
+    display: flex;
+    flex-flow: column nowrap;
+    flex-grow: 0;
     justify-content: start;
-    flex-grow: 1;
+    margin: 0;
+    max-height: 450px;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0;
+    width: 100%;
 }
 
 .productList {
@@ -374,10 +405,10 @@ progress {
 }
 
 .content::-webkit-scrollbar {
-    position: absolute;
-    display: run-in;
     background-color: rgba(0, 0, 0, 0.205);
     border-radius: 20px;
+    display: run-in;
+    position: absolute;
 }
 
 .content::-webkit-scrollbar-button {
@@ -394,44 +425,43 @@ progress {
 
 .content::-webkit-scrollbar-thumb {
     background-color: #00000036;
-    border-radius: 20px;
-    border-right: none ;
     border-left: none;
+    border-radius: 20px;
+    border-right: none;
 }
 
-
-.imgEmpty{
-    width: 70px;
-}
-
-.nameTitle {
-    color: var(--black);
-}
-
-.size {
-    color: var(--black);
-}
-.price {
-    color: var(--black);
-    margin-right: 10px;
-}
-
-.titles{
+.titles {
     all: unset;
-    margin: 30px 0 10px 0;
+    background-color: var(--first);
     content-visibility: hidden;
-    align-items: center;
     display: flex;
     flex-flow: row nowrap;
-    flex-grow: 0;
-    height: 0;
-    justify-content: space-between;
-    padding: 0;
-    text-align: center;
-    width: 400px;
+    flex-grow: 1;
+    max-height: 30px;
     list-style: none;
-    background-color: var(--first);
+    padding: 0;
+    flex-grow: 0;
 }
+
+.titles > *:not(:first-child,:nth-child(4), :last-child) {
+    border-right: 2px solid #00000033
+}
+
+
+
+.titles span {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
+    flex-grow: 1;
+    margin: 0;
+    width: 100px;
+    padding: 0 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 .imgList {
     background-image: url("img/1.jpg");
@@ -440,9 +470,11 @@ progress {
     background-size: cover;
     border-radius: 50%;
     content-visibility: hidden;
-    flex-grow: 0;
+    flex-grow: 1;
     height: 70px;
-    margin: 0 10px;
+    min-width: 70px;
+    min-height: 70px;
+    margin: 0 8px;
     width: 70px;
 }
 .imgList:hover {
@@ -456,43 +488,86 @@ progress {
     color: var(--fourth);
     display: flex;
     flex-flow: row nowrap;
-    flex-grow: 0;
+    flex-grow: 1;
     height: 100%;
-    justify-content: space-between;
-    margin: 0 0 10px 0;
-    padding: 0;
-    text-align: center;
-    width: 400px;
     list-style: none;
+    margin: 18px 0;
+    padding: 0;
+    width: 100%;
 }
 
+.newItem span{
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+
+.newItem > :not(:nth-child(4),:last-child, .emptyCart) {
+    border-right: 2px solid #00000033;
+}
+
+.price {
+    min-width: 90px;
+    max-width: 90px;
+}
+
+.quant-container{
+    min-width: 95px;
+    max-width: 95px;
+
+}
+
+.name {
+    min-width: 105px;
+    max-width: 105px;
+}
 .newItem:hover {
     cursor: default;
 }
 
-.name {
-    flex-grow: 0;
+
+.empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty span {
+    width: 200px;
+    height: 30px;
+}
+
+.emptyCart {
+    background-position: center;
+    background-size: 100px;
+    background-repeat: no-repeat;
     width: 150px;
+    height: 150px;
+    border-right: 0;
 }
-.price {
-    flex-grow: 1;
-}
+
 .cartContainer {
     background-color: var(--first);
     border-radius: 20px;
     content-visibility: hidden;
     display: flex;
     height: auto;
-    left: -350px;
+    left: -450px;
     margin: 0;
     padding: 0;
     position: absolute;
     top: 70px;
-    width: 400px;
+    width: 450px;
     z-index: 1;
 }
-
-
 
 .cartContainer:hover {
     cursor: default;
@@ -501,6 +576,7 @@ progress {
 .quantity {
     text-align: center;
     width: 40px;
+    margin: 0 30px;
 }
 
 .child {
@@ -516,51 +592,45 @@ progress {
     z-index: 0;
 }
 
-
-
-
-
-.top{
+.top {
+    align-items: flex-end;
     background-color: transparent;
-    border-radius: 40px;
+    background-image: url("/img/1.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    border: 5px solid rgb(136, 154, 212);
+    border-radius: 40px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
         rgba(0, 0, 0, 0.05) 0px 5px 10px;
     display: flex;
+    filter: contrast(1.3) brightness(0.9) saturate(1.3);
     flex-flow: row wrap;
+    flex-grow: 0;
+    height: 350px;
     justify-content: space-evenly;
-    align-items: flex-end;
     margin: 30px auto;
     width: auto;
-    z-index: 0;
-    height: 350px;
-    filter: contrast(1.3) brightness(0.9) saturate(1.3);
-    flex-grow: 0;
-    background-image: url("/img/1.jpg");
     width: 70%;
-    border: 5px solid rgb(136, 154, 212);
+    z-index: 0;
 }
 
 .fa-solid {
-    width: auto;
-    height: auto;
-    display: flex;
-    position: absolute;
-    content-visibility: visible;
     background-color: transparent;
-    z-index: 1;
-    transform: scale(3);
     color: #ffffffb0;
+    content-visibility: visible;
+    display: flex;
     filter: drop-shadow(0px 1px 0px #0000006e);
+    height: auto;
+    position: absolute;
+    transform: scale(3);
+    width: auto;
+    z-index: 1;
 }
 
-
-
 .fa-solid:hover {
-    cursor: pointer;
     color: var(--first);
+    cursor: pointer;
 }
 
 .fa-angle-left {
@@ -573,29 +643,28 @@ progress {
     top: 50%;
 }
 
-
 .details {
-    background-color: rgba(0, 0, 0, 0.623);
-    height: 90px;
-    width: 100%;
-    border-radius: 0 0 30px 30px;
-    display: flex;
     align-items: center;
-    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.623);
+    border-radius: 0 0 30px 30px;
     color: var(--first);
+    display: flex;
+    height: 90px;
+    justify-content: center;
     text-shadow: var(--black) 0px 0px 10px;
+    width: 100%;
 }
 
-.details button{
-    height: 40px;
-    width: 100px;
+.details button {
     flex-grow: 0;
+    height: 40px;
     margin: 0 30px;
+    width: 100px;
 }
 
 .details span {
+    flex-grow: 0.8;
     font-size: 30px;
-    flex-grow: .8;
     text-align: center;
 }
 
@@ -613,17 +682,22 @@ progress {
 }
 
 .items {
+    background: #a47ffc8e;
     position: relative;
     z-index: 0;
-    background: #a47ffc8e;
 }
 
-.item{
+.item {
     outline: var(--second) solid 4px;
 }
 
 .landscape {
-    background: linear-gradient(30deg, var(--third), var(--fourth), var(--third));
+    background: linear-gradient(
+        30deg,
+        var(--third),
+        var(--fourth),
+        var(--third)
+    );
     border-radius: 0;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
         rgba(0, 0, 0, 0.05) 0px 5px 10px;
@@ -649,8 +723,6 @@ progress {
     width: 100%;
     z-index: 1;
 }
-
-
 
 .menu .menuList {
     align-content: space-evenly;
@@ -706,14 +778,14 @@ progress {
     width: 100%;
     z-index: 0;
 }
-.total{
+.total {
     background-color: #1d47d31f;
 }
 .text {
     flex-grow: 4;
 }
 .title {
-    content: url('/img/title.png');
+    content: url("/img/title.png");
     content-visibility: visible;
     margin: 50px 0;
     position: relative;
@@ -722,21 +794,21 @@ progress {
 }
 
 #url {
-    width: 250px;
-    display: flex;
     align-items: center;
+    display: flex;
     justify-content: center;
+    width: 250px;
 }
 
 #url::before {
-    color: var(--fourth);
     background-color: var(--first);
+    border-radius: 20px;
+    color: var(--fourth);
     content: "Choose a File";
     height: 30px;
-    width: 250px;
-    border-radius: 20px;
     position: absolute;
     text-align: center;
+    width: 250px;
 }
 #url:hover::before {
     background-color: var(--second);
@@ -744,26 +816,44 @@ progress {
 }
 
 #url input[type="file"] {
+    display: inline-block;
+    height: 30px;
     opacity: 0;
     width: 200px;
-    height: 30px;
-    display: inline-block;
 }
 
 .fa-cart-shopping {
-    color: var(--fourth);
-    font-size: 12px;
     align-items: center;
-    text-shadow: none;
+    color: var(--fourth);
     filter: none;
+    font-size: 12px;
     margin: -2px 0 0 0;
+    text-shadow: none;
 }
+
+.fa-delete-left{
+    color: var(--sixth);
+    font-size: 10px;
+    position: relative;
+    padding-right: 15px;
+    margin: 0px 50px 0 30px;
+    filter: drop-shadow(rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgb(0, 0, 0) 0px 5px 10px);
+    opacity: 0.7;
+}
+
+.fa-delete-left:hover {
+    color:  var(--second);
+    opacity: 1;
+}
+
+
 
 button:hover {
     background-color: var(--second);
 }
 
-button:hover *{
+button:hover * {
     color: var(--first);
 }
 
@@ -771,7 +861,7 @@ button:hover *{
     .title {
         transform: scale(0.7) skewY(-10deg) translateY(25px);
     }
-    
+
     .item {
         width: 50%;
     }
@@ -792,14 +882,14 @@ button:hover *{
     }
 
     .cartContainer {
-        left: -160px;
+        left: -200px;
         top: 30px;
         transform: scale(0.8);
     }
 
     .details span {
+        flex-grow: 0.2;
         font-size: 15px;
-        flex-grow: .2;
         text-align: center;
     }
     .details :nth-child(2) {

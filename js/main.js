@@ -46,11 +46,12 @@ let nameDocument = getDocumentName();
 console.log(nameDocument);
 
 let quantityInput;
-let quantity = 0;
+let quantity;
 let foodProduct = {};
 
 let cart = document.querySelector(".cart");
 let cartCounter = cart.querySelector(".productCounter");
+cartCounter.innerHTML = 0;
 let showCart = document.querySelector(".cartContainer");
 let itemContainer = document.querySelector(".items");
 let cartContent = document.querySelector(".content");
@@ -105,7 +106,6 @@ if (nameDocument == "index.html" || nameDocument == "") {
     nextProduct = () => {
         progress[index].value = 0;
         index = queueCircle(++index, topList.length);
-        console.log(index);
         name.innerHTML = topList[index].name;
         price.innerHTML = `$ ${topList[index].price}`;
         top.style.backgroundImage = `url(${topList[index].img})`;
@@ -278,7 +278,6 @@ function addProduct(item) {
 
 function addItemToCart(product) {
     if (isOnCart(product)) {
-        alert("Product already in cart increse the quantity instead");
         return false;
     }
     let htmlNode = document.createElement("li");
@@ -293,17 +292,24 @@ function addItemToCart(product) {
     htmlNode.appendChild(text);
     text.innerHTML = product.name;
     let input = document.createElement("input");
+    let containerInput = document.createElement('span');
+    containerInput.className = 'quant-container'
     input.className = "quantity";
     input.id = `${product.name}`;
     input.type = "number";
     input.min = "0";
     input.max = "10";
     input.value = "1";
-    htmlNode.appendChild(input);
+    htmlNode.appendChild(containerInput);
+    containerInput.appendChild(input);
     let price = document.createElement("span");
+    let erase = document.createElement('i');
+    erase.setAttribute('class', 'fa-solid fa-delete-left')
+
     price.className = "price";
     price.id = `price${product.name}`;
     htmlNode.appendChild(price);
+    htmlNode.appendChild(erase);
     price.innerHTML = `$${product.price}.00`;
     img.style.backgroundImage = `url('${product.img}')`;
     product.quantCart++;
@@ -330,30 +336,28 @@ function clearCart() {
     list.className = "newItem empty";
     cartContent.appendChild(list);
     let img = document.createElement("img");
-    img.className = "imgList";
+    img.className = "emptyCart";
     list.appendChild(img);
     let text = document.createElement("span");
     text.className = "name empty";
     list.appendChild(text);
     text.innerHTML = "Cart is empty";
     list.style.flexFlow = "column nowrap";
-    img.style.width = "150px";
-    img.style.height = "150px";
     img.style.backgroundImage = "url('img/shopping-cart-empty.png')";
-    img.style.backgroundSize = "100px";
-    img.style.backgroundPosition = "20px center";
+    
     list.style.color = "var(--sixth)";
     text.style.filter = "opacity(0.2)";
     text.style.marginBottom = "30px";
     img.style.filter = "opacity(0.2)";
     quantity = 0;
-    cartCounter.innerHTML = quantity;
+    cartCounter.innerHTML = 0;
     cartCounter.style.display = "none";
     cartContent.style.borderRadius = "0 0 20px 20px";
     document.querySelector(".titles").style.contentVisibility = "hidden";
     document.querySelector(".titles").style.backgroundColor = "var(--first)";
     document.querySelector(".titles").style.height = "0";
     document.querySelector(".total").style.height = "0";
+    showAlert('Cart is clean');
 }
 
 function isOnCart(product) {
@@ -406,10 +410,13 @@ function addEventInput (input){
         }
         else{
             getTotal(input.id);
+            cartCounter.innerHTML = 0
+            updateCartCounter();
         }
-        
+        console.log(product);
     });
 }
+
 
 function addToShop(item) {
     if (shopList.includes(item)) {
@@ -431,12 +438,13 @@ function addAllButtons(button) {
 function removeItemFromCart(product){
     cartListNode.forEach(function(item){
         if(item.innerHTML.includes(product.name)){
-            cartContent.removeChild(item);
+            item.remove();
             cartListNode.splice(cartListNode.indexOf(item), 1);
             cartList.splice(cartList.indexOf(product), 1);
         }
     });
     getTotal();
+    updateCartCounter()
     if(cartList.length == 0){
         clearCart();
     }
@@ -447,7 +455,7 @@ function addButtonToCart(name) {
         let isDone = addItemToCart(product);
         if (isDone) {
             quantity++;
-            cartCounter.innerHTML = quantity;
+            cartCounter.innerHTML++;
             cartCounter.style.display = "flex";
             if (quantity == 1) {
                 document.querySelector(".empty").remove();
@@ -461,14 +469,17 @@ function addButtonToCart(name) {
             }
             getTotal();
             document.querySelector(".total").style.height = '30px';
-            
+            showAlert('Product Added');
+        }
+        else {
+            showAlert('Product Already In Cart');
         }
 }
 
-setTimeout(function(){
+/* setTimeout(function(){
     console.log('Ready');
     isReady = true;
-}, 10000);
+}, 10000); */
 
 
 if(nameDocument == '' || nameDocument == 'index.html'){
@@ -489,4 +500,33 @@ function queueCircle(index, length){
         index = 0;
     }
     return index;
+}
+
+
+function showAlert(string){
+    setTimeout(function(){}, 1000);
+    let alertBox = document.createElement('div');
+    let alert = document.createElement('div');
+    alertBox.id = 'alertBox';
+    alert.id = 'alert';
+    alertBox.appendChild(alert);
+    document.querySelector('body').append(alertBox);
+    alertBox.style.display = 'flex';
+    alertBox.style.opacity = 1;
+    alert.innerText = string;
+    setTimeout(function(){
+        alertBox.style.opacity = 0;
+    },200);
+    setTimeout(function(){
+        alertBox.style.display = 'none';
+        alertBox.remove();
+    },3000);
+}
+
+function updateCartCounter(){
+    let sum = 0;
+    for(let element of cartList){
+        sum += Number(element.quantCart);
+    }
+    cartCounter.innerHTML = sum;
 }
