@@ -8,7 +8,12 @@ let nameDocument = getDocumentName();
 console.log(nameDocument);
 
 let quantityInput;
-let quantity;
+let quantity = localStorage.getItem('counterCart');
+
+if(quantity == null){
+    quantity = 0;
+}
+
 let foodProduct = {};
 
 let cart = document.querySelector(".cart");
@@ -483,18 +488,19 @@ function addButtonToCart(name) {
         let isDone = addItemToCart(product);
         if (isDone) {
             quantity++;
+            localStorage.setItem('counterCart', quantity);
             cartCounter.innerHTML++;
             cartCounter.style.display = "flex";
             if (quantity == 1) {
                 document.querySelector(".empty").remove();
-                document.querySelector(".titles").style.contentVisibility =
-                    "visible";
-                document.querySelector(".titles").style.height =
-                    "50px";
-                document.querySelector(".titles").style.backgroundColor = "var(--seventh)";
-                document.querySelector(".total").style.display =
-                    "block";
             }
+            document.querySelector(".titles").style.contentVisibility =
+                "visible";
+            document.querySelector(".titles").style.height =
+                "50px";
+            document.querySelector(".titles").style.backgroundColor = "var(--seventh)";
+            document.querySelector(".total").style.display =
+                "block";
             getTotal();
             document.querySelector(".total").style.height = '30px';
             showAlert('Product Added');
