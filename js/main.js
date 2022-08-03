@@ -1,6 +1,5 @@
 /* Este es el documento JS del index de un carrito de compras
 Edwin Donaldo Saucedo Vazquez  Clase Javascript 30435 */
-
 class Product {
     constructor(name, price, img) {
         this.name = name;
@@ -13,7 +12,7 @@ let index = 0;
 let isReady = false;
 let nextProduct;
 let progress;
-
+let showClear = false;
 let shopList  = [
     { name: "Spaghetti", price: 5.0, img: "img/1.jpg", quantCart: 0 },
     { name: "Burger with fries", price: 1.0, img: "img/2.jpg", quantCart: 0 },
@@ -324,7 +323,7 @@ function isOnList(identifier) {
 }
 
 
-function clearCart() {
+function clearCart(show) {
     cartList.forEach(function (item) {
         item.quantCart = 0;
     });
@@ -357,7 +356,12 @@ function clearCart() {
     document.querySelector(".titles").style.backgroundColor = "var(--first)";
     document.querySelector(".titles").style.height = "0";
     document.querySelector(".total").style.height = "0";
-    showAlert('Cart is clean');
+    if(showClear){
+        showAlert('Cart is clean');
+    }
+    else{
+        showClear = true;
+    }
 }
 
 function isOnCart(product) {
@@ -530,3 +534,87 @@ function updateCartCounter(){
     }
     cartCounter.innerHTML = sum;
 }
+
+
+//Scroll event for animation
+
+let lastScroll = 0;
+let initFirstCount = true;
+let initSecondCount = false;
+let scrollDown =  $('.angles-down');
+let scrollUp =  $('.angles-up');
+let isScrolling;
+
+scrollUp.hide();
+scrollDown.hide();
+
+//**console.log('Tamanio', document.body.clientHeight - window.innerHeight); //calcular el espacio disponible del scroll
+
+window.addEventListener('scroll', (e) => {
+    scroll = window.pageYOffset;
+    
+    isScrolling = true;
+    if(scroll > lastScroll){
+        //console.log('down');
+        if(scroll == document.body.clientHeight - window.innerHeight){
+            scrollDown.hide();
+        }
+        else {
+            scrollDown.show();
+            scrollUp.hide();
+
+        }
+        if(initFirstCount){
+            
+            setTimeout(() => {
+                initFirstCount = false;
+                initSecondCount = true;
+            }, 500);
+            scrollDown.addClass("angles-down-an");
+        }
+        else if (initSecondCount){
+            setTimeout(() => {
+                initFirstCount = true;
+                initSecondCount = false;
+            }, 500);
+            scrollDown.removeClass("angles-down-an");
+        }
+    }
+    else{
+        //console.log('up');\
+        if(scroll == 0){
+            scrollUp.hide();
+        }
+        else {
+            scrollDown.hide();
+            scrollUp.show();
+
+        }
+        if(initFirstCount){
+            setTimeout(() => {
+                initFirstCount = false;
+                initSecondCount = true;
+            }, 500);
+            scrollUp.addClass("angles-up-an");
+        }
+        else if (initSecondCount){
+            setTimeout(() => {
+                initFirstCount = true;
+                initSecondCount = false;
+            }, 500);
+            scrollUp.removeClass("angles-up-an");
+        }
+    }
+    lastScroll = scroll;
+    
+    isScrolling = false;
+})
+
+
+//Check for hide the scroll animation
+setInterval(() => {
+    if(!isScrolling){
+        scrollUp.hide();
+        scrollDown.hide();
+    }
+}, 500);
