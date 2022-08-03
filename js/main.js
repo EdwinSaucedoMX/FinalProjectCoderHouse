@@ -1,19 +1,33 @@
 /* Este es el documento JS del index de un carrito de compras
 Edwin Donaldo Saucedo Vazquez  Clase Javascript 30435 */
-class Product {
-    constructor(name, price, img) {
-        this.name = name;
-        this.price = price;
-        this.img = img;
-        this.quantCart = 0;
+
+let topList = JSON.parse(localStorage.getItem('topList'));
+let shopList = JSON.parse(localStorage.getItem('shopList'));
+
+let nameDocument = getDocumentName();
+console.log(nameDocument);
+
+let quantityInput;
+let quantity;
+let foodProduct = {};
+
+let cart = document.querySelector(".cart");
+let cartCounter = cart.querySelector(".productCounter");
+cartCounter.innerHTML = 0;
+let showCart = document.querySelector(".cartContainer");
+let itemContainer = document.querySelector(".items");
+let cartContent = document.querySelector(".content");
+
+const addTopProducts = (set) => { //Function to add three items to Top List
+    while(set.size != 3){
+        let number = parseInt(Math.random()*20);
+        set.add(shopList[number]);
     }
-}
-let index = 0;
-let isReady = false;
-let nextProduct;
-let progress;
-let showClear = false;
-let shopList  = [
+};
+
+
+if(shopList == null){
+    shopList =[
     { name: "Spaghetti", price: 5.0, img: "img/1.jpg", quantCart: 0 },
     { name: "Burger with fries", price: 1.0, img: "img/2.jpg", quantCart: 0 },
     { name: "Steak", price: 8.0, img: "img/3.jpg", quantCart: 0 },
@@ -33,27 +47,52 @@ let shopList  = [
     { name: "Ramen", price: 8.0, img: "img/17.jpg", quantCart: 0 },
     { name: "Wings", price: 10.0, img: "img/18.jpg", quantCart: 0 },
     { name: "Donuts", price: 1.0, img: "img/19.jpg", quantCart: 0 },
-    { name: "Fried Chicked", price: 8.0, img: "img/20.jpg", quantCart: 0 },
+    { name: "Fried Chicked", price: 8.0, img: "img/20.jpg", quantCart: 0 } 
 ];
+    localStorage.setItem('shopList', JSON.stringify(shopList));
+    console.log(shopList);
+} 
 
-let cartList = [];
-let cartListNode = [];
+if(topList == null){
+    let topListSet = new Set();
+    addTopProducts(topListSet);    
+    topList = Array.from(topListSet);
+    localStorage.setItem('topList', JSON.stringify(topList));
+}
+class Product {
+    constructor(name, price, img) {
+        this.name = name;
+        this.price = price;
+        this.img = img;
+        this.quantCart = 0;
+    }
+}
+let index = 0;
+let isReady = false;
+let nextProduct;
+let progress;
+let showClear = false;
+
+
+
+
+let cartList = JSON.parse(localStorage.getItem('cartList'));
+let cartListNode = JSON.parse(localStorage.getItem('cartListNode'));
+
+if (cartList == null && cartListNode == null){
+    cartList = [];
+    cartListNode = [];
+    clearCart();
+}
+else {
+    cartList.forEach(item => {
+        addButtonToCart(item.name);
+    });
+}
 
 /************************************************************************************/
 
-let nameDocument = getDocumentName();
-console.log(nameDocument);
 
-let quantityInput;
-let quantity;
-let foodProduct = {};
-
-let cart = document.querySelector(".cart");
-let cartCounter = cart.querySelector(".productCounter");
-cartCounter.innerHTML = 0;
-let showCart = document.querySelector(".cartContainer");
-let itemContainer = document.querySelector(".items");
-let cartContent = document.querySelector(".content");
 
 
 //console.log(product);
@@ -72,24 +111,6 @@ if (nameDocument == "index.html" || nameDocument == "") {
     let details = document.querySelector(".details");
     let nextRight = document.querySelector('.fa-angle-right');
     let nextLeft = document.querySelector('.fa-angle-left');
-    
-    
-    //Variables JS
-    let nextOne = (number) => {
-        let otherNumber = Math.random() * 20;
-        while(otherNumber === number){
-            otherNumber = Math.random() * 20;
-        }
-        return parseInt(otherNumber);
-    }
-    
-    let number = parseInt(Math.random()*20);
-    let topList = [];
-    topList.push(shopList[number]);
-    topList.push(shopList[nextOne(number)]);
-    topList.push(shopList[nextOne(number)]);
-    console.log(topList);
-    
     
     
     let name = document.createElement('span');
@@ -198,16 +219,15 @@ if (nameDocument == "login.html") {
             }
             else{
                 let product = new Product(name, price, `img/${url}`);
-                console.log(product);
                 shopList.push(product);
-                console.log(shopList);
+                localStorage.setItem('shopList', JSON.stringify(shopList));
             }
         });
     }
     
     function deleteLastProduct() {
         let lastProduct = shopList.pop();
-        console.log(lastProduct);
+        localStorage.setItem('shopList', JSON.stringify(shopList));
         return lastProduct;
     }
 }
@@ -226,7 +246,6 @@ function getDocumentName() {
         self.location.href.lastIndexOf("/") + 1
     );
 }
-clearCart();
 
 cart.addEventListener("click", function (e) {
     if (e.target.classList.contains("cart")) {
@@ -314,7 +333,10 @@ function addItemToCart(product) {
     product.quantCart++;
     cartList.push(product);
     cartListNode.push(htmlNode);
+    localStorage.setItem('cartList', JSON.stringify(cartList));
+    localStorage.setItem('cartListNode', JSON.stringify(cartListNode));
     addEventInput(input);
+    console.log(htmlNode.innerHTML);
     return true;
 }
 
@@ -324,10 +346,13 @@ function isOnList(identifier) {
 
 
 function clearCart(show) {
-    cartList.forEach(function (item) {
-        item.quantCart = 0;
-    });
+    if(cartList.length > 0){
+        cartList.forEach(function (item) {
+            item.quantCart = 0;
+        });
+    }
     cartList = [];
+    cartListNode = [];
     cartContent.innerHTML = "";
     document.querySelector(".total").innerHTML = "$0.00";
     document.querySelector(".total").style.display = "none";
@@ -417,7 +442,6 @@ function addEventInput (input){
             cartCounter.innerHTML = 0
             updateCartCounter();
         }
-        console.log(product);
     });
 }
 
