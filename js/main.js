@@ -328,7 +328,6 @@ function addItemToCart(product) {
     let price = document.createElement("span");
     let erase = document.createElement('i');
     erase.setAttribute('class', 'fa-solid fa-delete-left')
-
     price.className = "price";
     price.id = `price${product.name}`;
     htmlNode.appendChild(price);
@@ -341,6 +340,7 @@ function addItemToCart(product) {
     localStorage.setItem('cartList', JSON.stringify(cartList));
     localStorage.setItem('cartListNode', JSON.stringify(cartListNode));
     addEventInput(input);
+    addRemoveButton(erase, product);
     console.log(htmlNode.innerHTML);
     return true;
 }
@@ -358,6 +358,10 @@ function clearCart(show) {
     }
     cartList = [];
     cartListNode = [];
+
+    localStorage.setItem('cartList', JSON.stringify(cartList));
+    localStorage.setItem('cartListNode', JSON.stringify(cartListNode));
+    
     cartContent.innerHTML = "";
     document.querySelector(".total").innerHTML = "$0.00";
     document.querySelector(".total").style.display = "none";
@@ -640,7 +644,11 @@ window.addEventListener('scroll', (e) => {
     isScrolling = false;
 })
 
-
+function addRemoveButton(button, product){
+    button.addEventListener('click', () => {
+        removeItemFromCart(product);
+    });
+}
 //Check for hide the scroll animation
 setInterval(() => {
     if(!isScrolling){
