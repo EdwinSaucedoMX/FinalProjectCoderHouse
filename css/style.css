@@ -75,7 +75,7 @@ html {
     background-attachment: fixed;
     background-blend-mode: luminosity;
     background-color: var(--second);
-    background-image: url(/img/background.jpg);
+    background-image: url(img/background.jpg);
     background-repeat: repeat;
     background-size: 400px;
     margin: 0;
