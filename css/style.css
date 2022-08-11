@@ -79,6 +79,8 @@ body > h1 {
     text-shadow: var(--black) 5px 5px 10px;
     top: 10px;
     width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
 }
 
 html {
@@ -302,6 +304,10 @@ body {
     z-index: 1;
 }
 
+.section{
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+}
 .cart {
     background-image: url("../img/shopping-cart.png");
     background-position: center;
