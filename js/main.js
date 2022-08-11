@@ -148,7 +148,7 @@ if (nameDocument == "index.html" || nameDocument == "") {
         overlayPrice.className = 'overlay-price';
     
         icon.setAttribute('class', 'fa-solid fa-cart-shopping icon-overlay');
-        img.setAttribute('src', `../${image}`);
+        img.setAttribute('src', `${image}`);
         
         overlayName.innerHTML = topName;
         overlayPrice.innerHTML = `$${topPrice}`;
