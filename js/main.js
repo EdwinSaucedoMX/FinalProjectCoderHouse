@@ -141,14 +141,14 @@ if (nameDocument == "index.html" || nameDocument == "") {
         
         let {price : topPrice} = topList[index];
         let {name : topName} = topList[index];
-        let {img : image} = topList[index];
+
         sliderItem.className = 'slider-item';
         overlay.className = 'overlay';
         overlayName.className = 'overlay-name';
         overlayPrice.className = 'overlay-price';
     
         icon.setAttribute('class', 'fa-solid fa-cart-shopping icon-overlay');
-        img.setAttribute('src', `${image}`);
+        img.setAttribute('src', topList[index].img);
         
         overlayName.innerHTML = topName;
         overlayPrice.innerHTML = `$${topPrice}`;
