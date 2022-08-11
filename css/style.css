@@ -144,7 +144,7 @@ body {
     filter: brightness(0.5);
     border-radius: 30px;
     outline: var(--fourth) solid 5px;
-    object-fit: contain;
+    object-fit: cover;
 }
 .slide .slider-item .overlay{
     width: 100%;
