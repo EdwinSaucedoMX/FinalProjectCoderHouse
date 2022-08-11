@@ -132,7 +132,7 @@ body {
 .slide .slider-item{
     width: 100%;
     height: 250px;
-    margin: 0.5%;
+    margin: 50px 0.6%;
     position: relative;
     transition: transform 0.5s;
 }
@@ -144,6 +144,7 @@ body {
     filter: brightness(0.5);
     border-radius: 30px;
     outline: var(--fourth) solid 5px;
+    object-fit: cover;
 }
 .slide .slider-item .overlay{
     width: 100%;
@@ -1056,7 +1057,6 @@ body {
     .slide .slider-item{
         
         height: 125px;
-        margin: 15px;
     }
     
     .slide .slider-item img{
