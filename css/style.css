@@ -119,7 +119,7 @@ body {
     width: 100vw;
 }
 
-.slick-container{
+.slick-container {
     width: 80%;
     margin: 0 auto;
     align-self: center;
@@ -127,11 +127,19 @@ body {
     border-radius: 20px;
 }
 
+.slick-arrow {
+    z-index: 2;
+    filter: drop-shadow(var(--fourth) 0px 0px 0px) !important;
+    position: relative;
+    opacity: 1 !important;
+}
+
+
 .slide {
     display: flex;
 }
 
-.slide .slider-item{
+.slide .slider-item {
     width: 100%;
     height: 250px;
     margin: 50px 0.6%;
@@ -139,7 +147,7 @@ body {
     transition: transform 0.5s;
 }
 
-.slide .slider-item img{
+.slide .slider-item img {
     width: 100%;
     height: 250px;
     transition: filter 0.2s;
@@ -148,7 +156,7 @@ body {
     outline: var(--fourth) solid 5px;
     object-fit: cover;
 }
-.slide .slider-item .overlay{
+.slide .slider-item .overlay {
     width: 100%;
     height: 50px;
     background-color: rgba(0, 0, 0, 0.562);
@@ -163,27 +171,23 @@ body {
     justify-content: space-between;
 }
 
-.slide .slider-item .icon-overlay{
+.slide .slider-item .icon-overlay {
     position: absolute;
     top: 30px;
     right: 30px;
     color: var(--fourth);
     opacity: 0.8;
 }
-.slide .slider-item .icon-overlay:hover{
+.slide .slider-item .icon-overlay:hover {
     opacity: 1;
 }
 
-
-.slide .slick-center{
+.slide .slick-center {
     transform: scale(1.2);
 }
-.slide .slick-center img{
+.slide .slick-center img {
     filter: none;
 }
-
-
-
 
 .item > img {
     background-position: 50%;
@@ -304,7 +308,7 @@ body {
     z-index: 1;
 }
 
-.section{
+.section {
     text-transform: uppercase;
     letter-spacing: 2.5px;
 }
@@ -1060,16 +1064,15 @@ body {
         flex-grow: 1;
     }
 
-    .slide .slider-item{
-        
-        height: 125px;
-    }
-    
-    .slide .slider-item img{
+    .slide .slider-item {
         height: 125px;
     }
 
-    .slide .slider-item .icon-overlay{
+    .slide .slider-item img {
+        height: 125px;
+    }
+
+    .slide .slider-item .icon-overlay {
         position: absolute;
         top: 30px;
         right: 45px;
@@ -1077,17 +1080,16 @@ body {
         opacity: 0.8;
     }
 
-    .slide .slider-item .overlay-price{
+    .slide .slider-item .overlay-price {
         display: none;
-    }    
-    .slide .slider-item .overlay > span{
+    }
+    .slide .slider-item .overlay > span {
         font-size: 15px;
-    }    
+    }
 
-    .slide .slider-item .overlay{
+    .slide .slider-item .overlay {
         justify-content: center;
-    }    
-
+    }
 }
 
 @keyframes increaseSize {

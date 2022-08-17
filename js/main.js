@@ -1,8 +1,32 @@
 /* Este es el documento JS del index de un carrito de compras
 Edwin Donaldo Saucedo Vazquez  Clase Javascript 30435 */
 
+class Product {
+    constructor(name, price, img) {
+        this.name = name;
+        this.price = price;
+        this.img = img;
+        this.quantCart = 0;
+    }
+}
+
 let topList = JSON.parse(localStorage.getItem("topList"));
 let shopList = JSON.parse(localStorage.getItem("shopList"));
+
+const makeCarrousel = () =>{
+    $(function () {
+        $(".slide").slick({
+            slidesToShow: 3,
+            arrows: true,
+            speed: 500,
+            centerMode: true,
+            centerPadding: "0",
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 2500,
+        });
+    });
+}
 
 let nameDocument = getDocumentName(); //To know Page Name
 console.log(nameDocument);
@@ -31,56 +55,48 @@ const addTopProducts = (set) => {
     }
 };
 
-if (shopList == null) {
-    shopList = [
-        { name: "Spaghetti", price: 5.0, img: "img/1.jpg", quantCart: 0 },
-        {
-            name: "Burger with fries",
-            price: 1.0,
-            img: "img/2.jpg",
-            quantCart: 0,
-        },
-        { name: "Steak", price: 8.0, img: "img/3.jpg", quantCart: 0 },
-        { name: "Meat Skewers", price: 10.0, img: "img/4.jpg", quantCart: 0 },
-        { name: "Vegan Pizza", price: 15.0, img: "img/5.jpg", quantCart: 0 },
-        { name: "Light Yogurt", price: 1.0, img: "img/6.jpg", quantCart: 0 },
-        {
-            name: "Rainbow  Ice Cream",
-            price: 1.0,
-            img: "img/7.jpg",
-            quantCart: 0,
-        },
-        { name: "Shawarma", price: 5.0, img: "img/8.jpg", quantCart: 0 },
-        { name: "Chicken Salad", price: 10.0, img: "img/9.jpg", quantCart: 0 },
-        { name: "Ribs", price: 15.0, img: "img/10.jpg", quantCart: 0 },
-        { name: "Panini", price: 1.0, img: "img/11.jpg", quantCart: 0 },
-        { name: "Italian Pasta", price: 3.0, img: "img/12.jpg", quantCart: 0 },
-        { name: "Skirt Steak", price: 5.0, img: "img/13.jpg", quantCart: 0 },
-        { name: "Churros", price: 1.0, img: "img/14.jpg", quantCart: 0 },
-        { name: "Skewers", price: 5.0, img: "img/15.jpg", quantCart: 0 },
-        { name: "Salad", price: 3.0, img: "img/16.jpg", quantCart: 0 },
-        { name: "Ramen", price: 8.0, img: "img/17.jpg", quantCart: 0 },
-        { name: "Wings", price: 10.0, img: "img/18.jpg", quantCart: 0 },
-        { name: "Donuts", price: 1.0, img: "img/19.jpg", quantCart: 0 },
-        { name: "Fried Chicked", price: 8.0, img: "img/20.jpg", quantCart: 0 },
-    ];
-    localStorage.setItem("shopList", JSON.stringify(shopList));
+/**  
+ * * Se implemento local Storage para verificar si la API fue leida
+*/
+let isAPIReady = localStorage.getItem('isAPIReady');
+if(isAPIReady == null){
+    isAPIReady = false;
+    localStorage.setItem('isAPIReady', isAPIReady);
 }
 
-if (topList == null) {
-    let topListSet = new Set();
-    addTopProducts(topListSet);
-    topList = Array.from(topListSet);
-    localStorage.setItem("topList", JSON.stringify(topList));
+/**  
+ * * Se implemento esta funcion para obtener los datos del inventario desde una API, en este caso interna
+*/
+
+if (shopList == null) {
+    fetch('./shopList.json')
+        .then(response => response.json())
+        .then(data => {
+            shopList = data;
+            shopList.sort((a, b) => a.name[0] > b.name[0] ? 1 : -1);
+            shopList.forEach(item => {
+                addProduct(item);
+            })
+            localStorage.setItem("shopList", JSON.stringify(shopList));
+        })
+        .catch(error => console.log('Tu error es:', error))
+        .finally(()=>{
+            if (topList == null) {
+                let topListSet = new Set();
+                addTopProducts(topListSet);
+                topList = Array.from(topListSet);
+                localStorage.setItem("topList", JSON.stringify(topList));
+            }
+            isAPIReady = true;
+            printTopList();
+            makeCarrousel();
+            localStorage.setItem('isAPIReady', isAPIReady);
+            console.log('Done', shopList);
+        })
+
 }
-class Product {
-    constructor(name, price, img) {
-        this.name = name;
-        this.price = price;
-        this.img = img;
-        this.quantCart = 0;
-    }
-}
+
+
 let index = 0;
 let isReady = false;
 let showClear = false;
@@ -108,66 +124,14 @@ if (cartList == null) {
 
 if (nameDocument == "index.html" || nameDocument == "") {
     //Carrousel Library implementation
-    $(document).ready(function () {
-        $(".slide").slick({
-            slidesToShow: 3,
-            dots: true,
-            speed: 500,
-            centerMode: true,
-            centerPadding: "0",
-            infinite: true,
-            autoplay: true,
-            autoplaySpeed: 2500,
-        });
-    });
-
-    for (let item of shopList) {
-        addProduct(item);
-    }
-    //DOM
-    let cont = 0;
-    let index = 0;
-    while(cont < 6){
-        if(cont == 3){
-            index = 0;
+    
+    if(isAPIReady){
+        for (let item of shopList) {
+            addProduct(item);
         }
-        let slide = document.querySelector('.slide');
-        let sliderItem = document.createElement('div');
-        let img = document.createElement('img');
-        let overlay = document.createElement('div');
-        let overlayName = document.createElement('span');
-        let overlayPrice = document.createElement('span');
-        let icon = document.createElement('i');
-        
-        let {price : topPrice} = topList[index];
-        let {name : topName} = topList[index];
-
-        sliderItem.className = 'slider-item';
-        overlay.className = 'overlay';
-        overlayName.className = 'overlay-name';
-        overlayPrice.className = 'overlay-price';
-    
-        icon.setAttribute('class', 'fa-solid fa-cart-shopping icon-overlay');
-        img.setAttribute('src', topList[index].img);
-        
-        overlayName.innerHTML = topName;
-        overlayPrice.innerHTML = `$${topPrice}`;
-        
-        icon.addEventListener('click', () => {
-            addButtonToCart(topName);
-        });
-
-        slide.appendChild(sliderItem);
-        sliderItem.appendChild(img);
-        sliderItem.appendChild(overlay);
-        overlay.appendChild(overlayName);
-        overlay.appendChild(overlayPrice);
-        sliderItem.appendChild(icon);
-
-        index++;
-        cont++;
+        printTopList();
+        makeCarrousel();
     }
-    
 }
 
 /*********************************************************************************/
@@ -661,3 +625,49 @@ setInterval(() => {
         scrollDown.hide();
     }
 }, 500);
+
+
+function printTopList(){
+    let cont = 0;
+    let index = 0;
+    while(cont < 6){
+        if(cont == 3){
+            index = 0;
+        }
+        let slide = document.querySelector('.slide');
+        let sliderItem = document.createElement('div');
+        let img = document.createElement('img');
+        let overlay = document.createElement('div');
+        let overlayName = document.createElement('span');
+        let overlayPrice = document.createElement('span');
+        let icon = document.createElement('i');
+        
+        let {price : topPrice} = topList[index];
+        let {name : topName} = topList[index];
+
+        sliderItem.className = 'slider-item';
+        overlay.className = 'overlay';
+        overlayName.className = 'overlay-name';
+        overlayPrice.className = 'overlay-price';
+    
+        icon.setAttribute('class', 'fa-solid fa-cart-shopping icon-overlay');
+        img.setAttribute('src', topList[index].img);
+        
+        overlayName.innerHTML = topName;
+        overlayPrice.innerHTML = `$${topPrice}`;
+        
+        icon.addEventListener('click', () => {
+            addButtonToCart(topName);
+        });
+
+        slide.appendChild(sliderItem);
+        sliderItem.appendChild(img);
+        sliderItem.appendChild(overlay);
+        overlay.appendChild(overlayName);
+        overlay.appendChild(overlayPrice);
+        sliderItem.appendChild(icon);
+
+        index++;
+        cont++;
+    }
+}
