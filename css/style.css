@@ -378,6 +378,63 @@ label {
     position: fixed;
 }
 
+
+.user{
+    position: fixed;
+    width: 400px;
+    height: 110px;
+    background-color: white;
+    top: 30px;
+    left: 30px;
+    z-index: 1;
+    border-radius: 50px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.user form {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+.user form > *{
+    margin: 4px 0;
+}
+
+.user form input{
+    border-radius: 30px;
+    font-weight: 400;
+    min-width: 80px;
+}
+
+.user form .logButton {
+    width: 90%;
+    display: flex;
+    align-content: space-around;
+    justify-content: space-evenly;
+}
+
+.user form .logButton button{
+    background-color: var(--fifth);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 2px 10px;
+    border: transparent 1px solid;
+}
+
+.user form .logButton button:hover{
+    background-color: var(--first);
+    color: var(--second);
+    border: none;
+    border-radius: 30px;
+    padding: 2px 10px;
+    border: rgba(0, 0, 0, 0.274) 1px solid;
+}
+
 .productCounter {
     align-items: center;
     background-color: var(--fourth);

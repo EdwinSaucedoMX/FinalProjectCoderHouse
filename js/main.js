@@ -73,7 +73,7 @@ if (shopList == null) {
         .then(response => response.json())
         .then(data => {
             shopList = data;
-            shopList.sort((a, b) => a.name[0] > b.name[0] ? 1 : -1);
+            
             shopList.forEach(item => {
                 addProduct(item);
             })
@@ -287,9 +287,7 @@ function addItemToCart(product) {
 
 function addingToCart(product) {
     let htmlNode = document.createElement("li");
-
     htmlNode.className = "newItem";
-    cartContent.appendChild(htmlNode);
     let img = document.createElement("img");
     img.className = "imgList";
     htmlNode.appendChild(img);
@@ -320,6 +318,7 @@ function addingToCart(product) {
     addEventInput(input);
     addRemoveButton(erase, product);
     cartListNode.push(htmlNode);
+    cartListNode.sort((a,b) => a.querySelector(".name").innerText > b.querySelector(".name").innerText ? 1 : -1);
 }
 
 function isOnList(identifier) {
@@ -490,20 +489,12 @@ function addButtonToCart(name) {
         }
         showInfoCart();
         showAlert("Product Added");
+        orderProducts();
     } else {
         showAlert("Product Already In Cart");
     }
 }
 
-
-function queueCircle(index, length) {
-    if (index < 0) {
-        index = length - 1;
-    } else if (index >= length) {
-        index = 0;
-    }
-    return index;
-}
 
 function showInfoCart() {
     document.querySelector(".titles").style.contentVisibility = "visible";
@@ -672,34 +663,53 @@ function printTopList(){
     }
 }
 
-function orderProducts(option, isPage){
-    if(isPage){
-        //console.log(shopList);
-        switch(option){
-            case 1:
-                shopList = shopList.sort((a ,b) => {
-                    console.log("Hola Mundo");
-                });
-                break;
-            case 2:
-                shopList = shopList.sort((a ,b) => a.name[0] > b.name[0] ? 1 : a.name[0] < b.name[0] ? -1 : 0);
-                break;
-            case 3:
-                shopList = shopList.sort((a ,b) => a.price - b.price);
-                break;
+function orderProducts(option){
+    option = parseInt(option);
+    let update;
+    update = new Promise((myResolve, myReject) =>{
+        if(option){
+            switch(option){
+                case 1:
+                    shopList.sort((a ,b) => (Math.random()*10) > (Math.random()*10) ? 1 : -1);
+                    break;
+                case 2:
+                    shopList.sort((a, b) => a.name[0] > b.name[0] ? 1 : -1);
+                    break;
+                case 3:
+                    shopList.sort((a ,b) => a.price - b.price);
+                    break;
+            }
+            myResolve(shopList);
         }
-        //console.log(shopList);
-    }
-    else{
-        //console.log(cartList);
-        cartList.sort((a ,b) => a.name[0] > b.name[0] ? 1 : a.name[0] < b.name[0] ? -1 : 0);
-        //console.log(cartList);
-    }
+        else{
+            cartList.sort((a ,b) => a.name[0] > b.name[0] ? 1 : a.name[0] < b.name[0] ? -1 : 0);
+            myReject(cartList);
+            console.log(cartListNode);
+        }
+        });
+
+    update
+    .then(()=> {
+        itemContainer.remove();
+        itemContainer = document.createElement('div');
+        itemContainer.className = 'container items';
+        let body = document.querySelector('.mainContent');
+        body.appendChild(itemContainer);
+        shopList.forEach(item => {
+            addProduct(item);
+        });
+    })
+    .catch(() =>{
+        cartListNode.forEach(product => {
+            cartContent.appendChild(product);
+        })
+    })
+
 }
 
 let sortingList = $(".orderList");
 sortingList.bind("change", (e) =>{
     let value = sortingList.val();
-    orderProducts(value, true);
+    orderProducts(value);
     console.log(value);
 });

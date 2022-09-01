@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
     </head>
-    <body>
+    <body class="mainContent">
 
         <div class="anglesContainer">
             <div class = 'angles-down'>
@@ -33,11 +33,20 @@
                     <li class="section"><a href="index.html">Home</a></li>
                     <li class="section">Services</li>
                     <li class="section">Contact</li>
-                    <li class="section"><a href="login.html">Login</a></li>
                 </ul>
                 
             </div>
         </header>
+        <div class="user">
+            <form action="submit">
+                <input type="text">
+                <input type="password" name="" id="">
+                <div class="logButton">
+                    <button>Login</button>
+                    <button>Register</button>
+                </div>
+            </form>
+        </div>
         <div class="cart">
             <span class="productCounter">1</span>
             <div class="cartContainer">
@@ -69,7 +78,7 @@
         <h1>Shop</h1>
         <label for="sort">Sort by: </label>
         <select name="sort" class="orderList">
-            <option value="1">Top Rated</option>
+            <option value="1">Featured</option>
             <option value="2">Name</option>
             <option value="3">Price</option>
         </select>
