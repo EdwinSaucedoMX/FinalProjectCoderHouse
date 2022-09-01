@@ -671,3 +671,35 @@ function printTopList(){
         cont++;
     }
 }
+
+function orderProducts(option, isPage){
+    if(isPage){
+        //console.log(shopList);
+        switch(option){
+            case 1:
+                shopList = shopList.sort((a ,b) => {
+                    console.log("Hola Mundo");
+                });
+                break;
+            case 2:
+                shopList = shopList.sort((a ,b) => a.name[0] > b.name[0] ? 1 : a.name[0] < b.name[0] ? -1 : 0);
+                break;
+            case 3:
+                shopList = shopList.sort((a ,b) => a.price - b.price);
+                break;
+        }
+        //console.log(shopList);
+    }
+    else{
+        //console.log(cartList);
+        cartList.sort((a ,b) => a.name[0] > b.name[0] ? 1 : a.name[0] < b.name[0] ? -1 : 0);
+        //console.log(cartList);
+    }
+}
+
+let sortingList = $(".orderList");
+sortingList.bind("change", (e) =>{
+    let value = sortingList.val();
+    orderProducts(value, true);
+    console.log(value);
+});
