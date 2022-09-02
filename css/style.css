@@ -393,8 +393,24 @@ label {
     align-items: center;
     justify-content: center;
 }
+.user::cue(form){
+    background-color: #000;
+}
+.user .fa-user{
+    position: relative;
+    width: 20%;
+    right: -80px;
+    color: var(--second);
+}
+
+.user .fa-user:hover{
+    color: var(--second);
+    cursor: pointer;
+}
 
 .user form {
+    position: relative;
+    width: 80%;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
