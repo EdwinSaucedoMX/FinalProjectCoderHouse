@@ -396,12 +396,16 @@ label {
     z-index: 2;
 }
 
+.userActive{
+    min-width: 400px !important;
+    transition: all .5s;
+    transition-delay: .5s;
+}
+
 .user:hover{
     width: 400px;
 }
-.user::cue(form){
-    background-color: #000;
-}
+
 .user .fa-user{
     position: relative;
     width: 10px;
@@ -416,44 +420,56 @@ label {
     color: var(--second);
 }
 
+.fa-user-active{
+    left: -20px !important;
+    transition: all 1s !important;
+}
+
 .user .fa-user:hover{
     color: var(--second);
     cursor: pointer;
 }
 
-.user form {
+.user .form-user {
     position: relative;
     width: 80%;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
-    justify-content: center;
     transform: scale(0);
+    justify-content: center;
     transform-origin: left;
-    transition: transform .5s;
+    transition: all .5s ;
 }
-.user:hover form {
+
+.user:hover .form-user {
     transform: scale(1);
-    
 }
-.user form > *{
+
+.user .form-user-active {
+    transform: scale(1) !important;
+    transition: all 1s !important;
+}
+
+
+.user .form-user > *{
     margin: 4px 0;
 }
 
-.user form input{
+.user .form-user input{
     border-radius: 30px;
     font-weight: 400;
     min-width: 80px;
 }
 
-.user form .logButton {
+.user .form-user .logButton {
     width: 90%;
     display: flex;
     align-content: space-around;
     justify-content: space-evenly;
 }
 
-.user form .logButton button{
+.user .form-user .logButton button{
     background-color: var(--fifth);
     color: white;
     border: none;
@@ -462,7 +478,7 @@ label {
     border: transparent 1px solid;
 }
 
-.user form .logButton button:hover{
+.user .form-user .logButton button:hover{
     background-color: var(--first);
     color: var(--second);
     border: none;
@@ -727,7 +743,7 @@ label {
 }
 
 .newItem > :not(:nth-child(4), :last-child, .emptyCart) {
-    border-right: 2px solid #00000033;
+    border-right: 2px solid #00000033 ;
 }
 
 .price {
@@ -763,12 +779,12 @@ label {
 }
 
 .emptyCart {
+    
     background-position: center;
     background-size: 100px;
     background-repeat: no-repeat;
     width: 150px;
     height: 150px;
-    border-right: 0;
 }
 
 .cartContainer {

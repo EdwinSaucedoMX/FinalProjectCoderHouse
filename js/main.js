@@ -713,3 +713,56 @@ sortingList.bind("change", (e) =>{
     orderProducts(value);
     console.log(value);
 });
+
+
+//to prevent closing login container
+
+$(".user").bind('click', (e)=>{
+    e.preventDefault()
+    $(".user").addClass('userActive');
+    $(".fa-user").addClass('fa-user-active');
+    $(".form-user").addClass('form-user-active');
+})
+
+//to close login container by default
+
+$("body").bind('click', (e)=>{
+    e.preventDefault()
+    if (!$(e.target).closest('.form-user').length) {
+        $(".user").removeClass('userActive');
+        $(".fa-user").removeClass('fa-user-active');
+        $(".form-user").removeClass('form-user-active');
+    }    
+})
+
+//to
+
+$('.login-btn').bind('click', (e) =>{
+    if($('.inLog')[0].value === 'admin'){
+        if($('.inLog')[1].value == 'admin'){
+            console.log('You are an Admin');
+        }
+    }
+    else{
+        fetch('./login.json')
+        .then(response => response.json())
+        .then(data => {
+            let login = data;
+            let position = -1;
+            login.forEach((element, index) =>{
+                if(element.name === $('.inLog')[0].value){
+                    position = index;
+                }
+            });
+            if(position >= 0){
+                if($('.inLog')[1].value === login[position].pass){
+                    console.log('Logged')
+                }
+            }
+            else{
+                console.log('Wrong data');
+            }
+        })
+        .catch(error => console.log('Tu error es:', error));
+    }
+})
