@@ -381,7 +381,7 @@ label {
 
 .user{
     position: fixed;
-    width: 400px;
+    width: 110px;
     height: 110px;
     background-color: white;
     top: 30px;
@@ -392,14 +392,27 @@ label {
     flex-flow: row wrap;
     align-items: center;
     justify-content: center;
+    transition: all .5s;
+    z-index: 2;
+}
+
+.user:hover{
+    width: 400px;
 }
 .user::cue(form){
     background-color: #000;
 }
 .user .fa-user{
     position: relative;
-    width: 20%;
-    right: -80px;
+    width: 10px;
+    left: -50px;
+    color: var(--second);
+    transition: all .5s;
+}
+.user:hover .fa-user{
+    position: relative;
+    width: 10px;
+    left: -20px;
     color: var(--second);
 }
 
@@ -415,6 +428,13 @@ label {
     flex-flow: column wrap;
     align-items: center;
     justify-content: center;
+    transform: scale(0);
+    transform-origin: left;
+    transition: transform .5s;
+}
+.user:hover form {
+    transform: scale(1);
+    
 }
 .user form > *{
     margin: 4px 0;
@@ -1149,11 +1169,20 @@ label {
     .cart{
         width: 50px;
         height: 50px;
-        left: 45%;
+        right: 40px;
     }
 
     
-    
+    .user{
+        transform: scale(60%);
+        left: 20px;
+        top: 0;
+    }
+
+    .user:hover{
+        transform: translateX(-80px) scale(.6);
+    }
+
     .title {
         height: 20px;
     }
@@ -1187,7 +1216,7 @@ label {
     .cartContainer {
         left: -205px;
         top: 30px;
-        transform: scale(60%);
+        transform: scale(60%) translateX(-120px);
         position: absolute;
     }
 
