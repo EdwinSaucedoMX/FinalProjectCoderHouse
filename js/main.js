@@ -10,6 +10,13 @@ class Product {
     }
 }
 
+class User {
+    constructor(name, isAdmin){
+        this.name = name;
+        this.isAdmin = isAdmin;
+    }
+}
+
 let topList = JSON.parse(localStorage.getItem("topList"));
 let shopList = JSON.parse(localStorage.getItem("shopList"));
 
@@ -103,8 +110,7 @@ let showClear = false;
 
 let cartList = JSON.parse(localStorage.getItem("cartList"));
 let cartListNode = [];
-
-if (cartList == null) {
+if (!cartList) {
     cartList = [];
     clearCart();
 } else {
@@ -319,6 +325,9 @@ function addingToCart(product) {
     addRemoveButton(erase, product);
     cartListNode.push(htmlNode);
     cartListNode.sort((a,b) => a.querySelector(".name").innerText > b.querySelector(".name").innerText ? 1 : -1);
+    cartListNode.forEach(product =>{
+        cartContent.appendChild(product);
+    })
 }
 
 function isOnList(identifier) {
@@ -391,17 +400,20 @@ function isOnCart(product) {
 //Events
 /*********************************************************************************/
 
-//Event for add product to cart
 
-let btnAddCart = document.querySelectorAll(".addCart");
+//function to add event to buttons on shoplist
+function getEventsBtn(){
+    let btnAddCart = document.querySelectorAll(".addCart");
 
-for (let btn of btnAddCart) {
-    addAllButtons(btn);
-    btn.addEventListener("click", function () {
-        addButtonToCart(btn.id);
-    });
+    for (let btn of btnAddCart) {
+        addAllButtons(btn);
+        btn.addEventListener("click", function () {
+            addButtonToCart(btn.id);
+        });
+    }
 }
 
+getEventsBtn();
 /*********************************************************************************/
 
 function getTotal(name) {
@@ -679,12 +691,14 @@ function orderProducts(option){
                     shopList.sort((a ,b) => a.price - b.price);
                     break;
             }
+            localStorage.setItem('shopList', JSON.stringify(shopList));
             myResolve(shopList);
         }
         else{
             cartList.sort((a ,b) => a.name[0] > b.name[0] ? 1 : a.name[0] < b.name[0] ? -1 : 0);
             myReject(cartList);
             console.log(cartListNode);
+            localStorage.setItem("cartList", JSON.stringify(cartList));
         }
         });
 
@@ -698,6 +712,7 @@ function orderProducts(option){
         shopList.forEach(item => {
             addProduct(item);
         });
+        getEventsBtn();
     })
     .catch(() =>{
         cartListNode.forEach(product => {
@@ -735,34 +750,70 @@ $("body").bind('click', (e)=>{
     }    
 })
 
-//to
-
-$('.login-btn').bind('click', (e) =>{
-    if($('.inLog')[0].value === 'admin'){
-        if($('.inLog')[1].value == 'admin'){
-            console.log('You are an Admin');
+let user = JSON.parse(localStorage.getItem('user'));
+let loginCont = document.querySelector('.user');
+console.log(loginCont);
+if(!user){
+    //to login as user or admin
+    loginCont.innerHTML = `
+    <form class="form-user" action="submit">
+    <input class="inLog" type="text">
+    <input class="inLog" type="password" name="" id="">
+    <div class="logButton">
+        <button class="btnlog login-btn">Login</button>
+        <button class="btnlog register-btn">Register</button>
+    </div>
+    </form>
+    <i class="fa-solid fa-user"></i>
+    `
+    $('.login-btn').bind('click', (e) =>{
+        if($('.inLog')[0].value === 'admin'){
+            if($('.inLog')[1].value == 'admin'){
+                showAlert('Logged As Admin');
+                user = new User($('.inLog')[0].value, true)
+                localStorage.setItem('user', JSON.stringify(user));
+                loginCont.innerHTML = `
+                        <span>Hello ${user.name}</span>
+                        <i class="fa-solid fa-user"></i>
+                        `
+                $('.fa-user').addClass('icon-name');
+            }
         }
-    }
-    else{
-        fetch('./login.json')
-        .then(response => response.json())
-        .then(data => {
-            let login = data;
-            let position = -1;
-            login.forEach((element, index) =>{
-                if(element.name === $('.inLog')[0].value){
-                    position = index;
+        else{
+            fetch('./login.json')
+            .then(response => response.json())
+            .then(data => {
+                let login = data;
+                let position = -1;
+                login.forEach((element, index) =>{
+                    if(element.name === $('.inLog')[0].value){
+                        position = index;
+                    }
+                });
+                if(position >= 0){
+                    if($('.inLog')[1].value === login[position].pass){
+                        showAlert('Logged');
+                        user = new User($('.inLog')[0].value, false);
+                        localStorage.setItem('user', JSON.stringify(user));
+                        loginCont.innerHTML = `
+                                <span>Hello ${user.name}</span>
+                                <i class="fa-solid fa-user"></i>
+                                `
+                        $('.fa-user').addClass('icon-name');
+                    }
                 }
-            });
-            if(position >= 0){
-                if($('.inLog')[1].value === login[position].pass){
-                    console.log('Logged')
+                else{
+                    showAlert('Invalid Data');
                 }
-            }
-            else{
-                console.log('Wrong data');
-            }
-        })
-        .catch(error => console.log('Tu error es:', error));
-    }
-})
+            })
+            .catch(error => console.log('Tu error es:', error));
+        }
+    })
+}
+else{
+    loginCont.innerHTML = `
+            <span>Hello ${user.name}</span>
+            <i class="fa-solid fa-user"></i>
+            `
+    $('.fa-user').addClass('icon-name');
+}

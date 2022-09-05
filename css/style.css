@@ -246,8 +246,10 @@ label {
     position: fixed;
     transition: all 1.5s ease-in-out;
     width: 100vw;
-    z-index: 1;
+    z-index: 3;
 }
+
+
 
 #alert {
     align-items: center;
@@ -1175,6 +1177,31 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.user span{
+    all: unset;
+    left: 30px;
+    content-visibility: hidden;
+    transform: scale(0);
+    text-align: center;
+    transition: all .5s;
+    transform-origin: left;
+    transition-delay: 1s;
+}
+.user:hover span{
+    all: unset;
+    width: 200px;
+    transform: scale(1);
+}
+
+.user .icon-name{
+    position: relative;
+    left: -7px;
+    transition: all .5s;
+}
+.user:hover .icon-name{
+    left: 30px;
 }
 
 @media screen and (max-width: 600px) {
